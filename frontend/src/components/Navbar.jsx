@@ -1,6 +1,5 @@
-import React from 'react'
-import { FaShoppingCart, FaHeart, FaUserCircle } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
+import { FaShoppingCart, FaHeart, FaUserCircle } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
@@ -13,6 +12,6 @@ const Navbar = () => {
       </div>
     </nav>
   )
-}
+};
 
-export default Navbar
+export default Navbar;

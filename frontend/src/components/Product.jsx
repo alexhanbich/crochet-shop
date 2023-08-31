@@ -1,9 +1,9 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { FaShoppingCart, FaHeart } from 'react-icons/fa'
-import Rating from './Rating'
+import { Link } from 'react-router-dom';
+import { FaShoppingCart, FaHeart } from 'react-icons/fa';
+import Rating from './Rating';
 
 const Product = ({ product }) => {
+    console.log(product)
     return (
         <div>
             <div className='flex flex-col border w-72 group overflow-hidden'>
@@ -18,7 +18,7 @@ const Product = ({ product }) => {
                         </button>
                     </div>
                 </Link>
-                <div className='mx-10 my-2'>
+                <div className='mx-10 my-3'>
                     <Rating value={ product.rating } />
                     <Link to='/'>
                         <h5 className='overflow-hidden text-ellipsis whitespate-nowrap text-center text-gray-700 mt-1'>{ product.name }</h5>
@@ -26,9 +26,8 @@ const Product = ({ product }) => {
                     </Link>
                 </div>
             </div>
-
         </div>
     )
-}
+};
 
-export default Product
+export default Product;

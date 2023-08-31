@@ -1,10 +1,19 @@
-import React from 'react'
-import Product from '../components/Product'
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import Product from '../components/Product';
 
 const Home = () => {
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    const getProducts = async () => {
+      const { data } = await axios.get('/api/products');
+      setProducts(data);
+    };
+    getProducts();
+  }, []);
   return (
-    <Product product={{ img: 'https://picsum.photos/200', name:'namesdfadsfsadfddddddddddddddddd', price:'price', rating:4.5, numReviews:'10' }} />
+    <Product product={products}/>
   )
-}
+};
 
-export default Home
+export default Home;
