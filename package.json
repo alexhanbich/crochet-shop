@@ -1,5 +1,5 @@
 {
-  "name": "crochetshop",
+  "name": "HangyShop",
   "version": "1.0.0",
   "description": "",
   "type": "module",
@@ -21,7 +21,10 @@
   },
   "homepage": "https://github.com/alexhanbich/crochet-shop#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
     "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^7.5.0"
   },
   "devDependencies": {
