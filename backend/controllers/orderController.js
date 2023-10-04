@@ -5,14 +5,10 @@ import calc from "../utils/calc.js";
 
 const createOrder = asyncHandler(async (req, res) => {
   const { orderItems, shippingAddress, paymentMethod } = req.body;
-  const shippingAddress_temp = ''
-  const paymentMethod_temp = ''
   if (orderItems && orderItems.length === 0) {
     res.status(400);
     throw new Error("No items in cart");
-  } 
-  else {
-    console.log(typeof orderItems)
+  } else {
     const itemsFromDB = await Product.find({
       _id: { $in: orderItems.map((i) => i._id) },
     });
@@ -28,28 +24,29 @@ const createOrder = asyncHandler(async (req, res) => {
         _id: undefined,
       };
     });
-    const { itemsPrice, taxPrice, shippingPrice, totalPrice } = calc(dbOrderItems);
-    console.log("before")
-    const order = new Order({
-      orderItems: dbOrderItems,
-      user: req.user._id,
-      shippingAddress_temp,
-      paymentMethod_temp,
-      itemsPrice,
-      taxPrice,
-      shippingPrice,
-      totalPrice,
-    });
-    console.log(order)
+    const { itemsPrice, taxPrice, shippingPrice, totalPrice } =
+      calc(dbOrderItems);
+    let order = null;
+    try {
+      order = new Order({
+        orderItems: dbOrderItems,
+        user: req.user._id,
+        shippingAddress,
+        paymentMethod,
+        itemsPrice,
+        taxPrice,
+        shippingPrice,
+        totalPrice,
+      });
+    } catch (err) {
+      console.log(err);
+    }
     let createdOrder = null;
     try {
       createdOrder = await order.save();
+    } catch (err) {
+      console.log(err);
     }
-    catch (err) {
-      console.log(err)
-    }
-    
-    console.log(createOrder)
     res.status(201).json(createdOrder);
   }
 });
@@ -59,9 +56,10 @@ const getOrders = asyncHandler(async (req, res) => {
 });
 
 const getOrderById = asyncHandler(async (req, res) => {
-  const order = await Order
-    .findById(req.params.id)
-    .populate("user", "name email");
+  const order = await Order.findById(req.params.id).populate(
+    "user",
+    "name email"
+  );
   if (order) {
     res.json(order);
   } else {

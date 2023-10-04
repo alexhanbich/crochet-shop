@@ -4,7 +4,6 @@ import User from '../models/userModel.js';
 
 const protect = asyncHandler(async (req, res, next) => {
     let token = req.cookies.jwt;
-    console.log(token)
     if (token) {
         try {
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -23,7 +22,6 @@ const protect = asyncHandler(async (req, res, next) => {
 });
 
 const admin = (req, res, next) => {
-    console.log(req, "come on man")
     if (req.user && req.user.isAdmin) {
         next();
     }

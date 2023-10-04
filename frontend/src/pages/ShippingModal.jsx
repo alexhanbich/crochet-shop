@@ -1,14 +1,21 @@
 import { useRef, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { saveShippingAddress } from "../slices/cartSlice";
+import { GrFormClose } from "react-icons/gr";
 
 const ShippingModal = ({ openModal, closeModal }) => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [address, setAddress] = useState("");
+  const [addressDetails, setAddressDetails] = useState("");
   const [city, setCity] = useState("");
-  const [postalCode, setPostalCode] = useState("");
+  const [state, setState] = useState("");
   const [country, setCountry] = useState("");
+  const [zipCode, setZipCode] = useState("");
+  const [phone, setPhone] = useState("");
+
+  const dispatch = useDispatch();
   const ref = useRef();
   useEffect(() => {
     if (openModal) {
@@ -17,78 +24,129 @@ const ShippingModal = ({ openModal, closeModal }) => {
       ref.current?.close();
     }
   }, [openModal]);
+
+  const isFormValid = () => {
+    return firstName && lastName && address && city && state && country && zipCode && phone;
+  }
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    dispatch(
+      saveShippingAddress({
+        firstName,
+        lastName,
+        address,
+        addressDetails,
+        city,
+        state,
+        country,
+        zipCode,
+        phone,
+      })
+    );
+    closeModal();
+  };
+
   return (
-    <dialog ref={ref} onCancel={closeModal} className="">
-      <form className="space-y-4" noValidate>
-        <div className="flex">
+    <dialog ref={ref} onCancel={closeModal} className="p-4">
+      <div className="flex justify-between">
+        <h1 className="pb-4">Shipping Address</h1>
+        <GrFormClose onClick={closeModal} />
+      </div>
+      <form className="space-y-4">
+        <div className="flex space-x-3">
           <div>
             <input
-              type="email"
+              type="text"
               className="border outline-blue-400 rounded-lg block w-full p-2.5"
               placeholder="First Name"
+              onChange={(e) => setFirstName(e.target.value)}
+              required
             />
           </div>
           <div>
             <input
-              type="email"
+              type="text"
               className="border outline-blue-400 rounded-lg block w-full p-2.5"
               placeholder="Last Name"
+              onChange={(e) => setLastName(e.target.value)}
+              required
             />
           </div>
         </div>
         <div>
           <input
-            type="password"
-            placeholder="••••••••"
-            className="=border outline-blue-400 rounded-lg block w-full p-2.5"
+            type="text"
+            placeholder="Address"
+            className="border outline-blue-400 rounded-lg block w-full p-2.5"
+            onChange={(e) => setAddress(e.target.value)}
+            required
           />
         </div>
         <div>
           <input
-            type="password"
-            placeholder="••••••••"
-            className="=border outline-blue-400 rounded-lg block w-full p-2.5"
+            type="text"
+            placeholder="Appartment, suite, etc (optional)"
+            className="border outline-blue-400 rounded-lg block w-full p-2.5"
+            onChange={(e) => setAddressDetails(e.target.value)}
           />
         </div>
-        <div className="flex">
+        <div className="flex space-x-3">
           <div>
             <input
-              type="email"
+              type="text"
               className="border outline-blue-400 rounded-lg block w-full p-2.5"
-              placeholder="First Name"
+              placeholder="City"
+              onChange={(e) => setCity(e.target.value)}
+              required
             />
           </div>
           <div>
             <input
-              type="email"
+              type="text"
               className="border outline-blue-400 rounded-lg block w-full p-2.5"
-              placeholder="Last Name"
+              placeholder="State"
+              onChange={(e) => setState(e.target.value)}
+              required
             />
           </div>
         </div>
-        <div className="flex">
+        <div className="flex space-x-3">
           <div>
             <input
-              type="email"
+              type="text"
               className="border outline-blue-400 rounded-lg block w-full p-2.5"
-              placeholder="First Name"
+              placeholder="Country"
+              onChange={(e) => setCountry(e.target.value)}
+              required
             />
           </div>
           <div>
             <input
-              type="email"
+              type="text"
               className="border outline-blue-400 rounded-lg block w-full p-2.5"
-              placeholder="Last Name"
+              placeholder="Zip Code"
+              onChange={(e) => setZipCode(e.target.value)}
+              required
             />
           </div>
         </div>
         <div>
           <input
-            type="password"
-            placeholder="••••••••"
-            className="=border outline-blue-400 rounded-lg block w-full p-2.5"
+            type="text"
+            placeholder="Phone"
+            className="border outline-blue-400 rounded-lg block w-full p-2.5"
+            onChange={(e) => setPhone(e.target.value)}
+            required
           />
         </div>
+        <button
+          onClick={submitHandler}
+          disabled={!isFormValid()}
+          className="w-full rounded-full bg-black mt-5 p-3 text-sm text-white transition hover:bg-gray-600 disabled:bg-gray-400"
+        >
+          Save Address
+        </button>
       </form>
     </dialog>
   );
