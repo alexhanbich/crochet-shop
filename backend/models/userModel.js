@@ -29,10 +29,11 @@ userSchema.methods.verifyPassword = async function (password) {
 };
 userSchema.pre('save', async function (next) { 
     if (!this.isModified('password')) {
+        console.log("should not hit")
         next();
-        const salt = await bcrypt.getSalt(10);
-        this.password = await bcrypt.hash(this.password, salt);
     }
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
 });
 
 const User = mongoose.model("User", userSchema);
