@@ -52,7 +52,8 @@ const createOrder = asyncHandler(async (req, res) => {
 });
 
 const getOrders = asyncHandler(async (req, res) => {
-  res.send("get my order items");
+  const orders = await Order.find({ user: req.user._id });
+  res.json(orders);
 });
 
 const getOrderById = asyncHandler(async (req, res) => {

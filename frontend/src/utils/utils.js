@@ -17,3 +17,8 @@ export const updateCart = (state) => {
   );
   localStorage.setItem("cart", JSON.stringify(state));
 };
+
+export const date = (dateStr) => {
+  return new Date(dateStr).toLocaleString();
+
+}

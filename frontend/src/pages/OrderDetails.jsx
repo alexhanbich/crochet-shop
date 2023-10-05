@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { useGetOrderDetailsQuery } from "../slices/ordersApiSlice";
 import CartItem from "../components/CartItem";
+import { date } from "../utils/utils";
 
 import React from "react";
 
@@ -20,7 +21,7 @@ const OrderDetails = () => {
     <div className="mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold text-black mb-8">Order #{order._id}</h1>
       <div className="flex mb-8 space-x-12">
-        <div className="text-lg">Order Date: {order.createdAt}</div>
+        <div className="text-lg">Order Date: {date(order.createdAt)}</div>
         {order.isDelivered ? (
           <button className="bg-white px-2 text-green-500 border rounded-xl">
             Delivered

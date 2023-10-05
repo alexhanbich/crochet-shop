@@ -1,19 +1,20 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom';
 import Navbar from './components/Navbar'
-import Home from './pages/Home'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import Footer from './components/Footer';
 
 const App = () => {
   return (
     <>
       <div className='max-w-screen-lg mx-auto font-body'>
-        <Navbar className='p'/>
+        <Navbar />
         <main>
-          <Outlet className='' />
+          <Outlet />
         </main>
         <ToastContainer />
+        <Footer />
       </div>     
     </>
 

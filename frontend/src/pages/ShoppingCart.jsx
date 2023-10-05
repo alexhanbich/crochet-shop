@@ -24,8 +24,8 @@ const ShoppingCart = () => {
   };
 
   const checkoutHandler = async () => {
-    navigate('/login?redirect=cart');
-    console.log(userInfo)
+    navigate("/login?redirect=cart");
+    console.log(userInfo);
     if (userInfo) {
       try {
         const res = await createOrder({
@@ -49,12 +49,20 @@ const ShoppingCart = () => {
     <div className="mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold text-black">Your Cart</h1>
       <div className="flex mt-8">
-        <div className="w-3/5 space-y-4 gap-x-8">
-          <hr />
-          {cartItems.map((product) => {
-            return <CartItem key={product._id} product={product} canEdit={true} />;
-          })}
-        </div>
+        {cartItems.length === 0 ? (
+          <div className="text-xl w-3/5 space-y-4 gap-x-8">
+            No items in cart.
+          </div>
+        ) : (
+          <div className="w-3/5 space-y-4 gap-x-8">
+            <hr />
+            {cartItems.map((product) => {
+              return (
+                <CartItem key={product._id} product={product} canEdit={true} />
+              );
+            })}
+          </div>
+        )}
         <div className="w-2/5 flex flex-col">
           <div className="border flex justify-end mx-8 p-8 bg-secondary h-fit mb-4">
             <div className="w-full">
@@ -65,7 +73,7 @@ const ShoppingCart = () => {
                     onClick={() => {
                       setOpenModal(true);
                     }}
-                    className="text-sm underline"
+                    className="text-sm underline hover:cursor-pointer"
                   >
                     Edit
                   </div>
@@ -87,7 +95,12 @@ const ShoppingCart = () => {
                     <div>{shippingAddress.phone}</div>
                   </div>
                 ) : (
-                  <div>
+                  <div
+                    onClick={() => {
+                      setOpenModal(true);
+                    }}
+                    className="flex justify-center space-x-2 items-center hover:underline hover:cursor-pointer"
+                  >
                     <BsPlusSquareDotted />
                     <div className="text-gray-500">Add Address</div>
                   </div>
@@ -138,11 +151,7 @@ const ShoppingCart = () => {
                 <hr />
                 <div className="flex justify-between text-black text-lg">
                   <dt className="">Total</dt>
-                  {!hasShipping() ? (
-                    <dd>-</dd>
-                  ) : (
-                    <dd>${cart.totalPrice}</dd>
-                  )}
+                  {!hasShipping() ? <dd>-</dd> : <dd>${cart.totalPrice}</dd>}
                 </div>
               </dl>
               <button

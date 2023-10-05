@@ -26,7 +26,7 @@ const Product = ({ product }) => {
                             <h5 className='w-3/4 truncate text-gray-700 mt-1'>{ product.name }</h5>
                             <Rating value={ product.rating }  />
                         </div>
-                        <h5 className='text-center font-bold text-gray-900 mt-1'>${ product.price }</h5>
+                        <h5 className='text-xl text-center font-bold text-gray-900 mt-1'>${ product.price.toFixed(2) }</h5>
                     </Link>
                 </div>
             </div>

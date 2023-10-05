@@ -17,6 +17,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import PrivateRoute from './components/PrivateRoute';
 import OrderDetails from './pages/OrderDetails';
+import Profile from './pages/Profile';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -28,6 +29,7 @@ const router = createBrowserRouter(
       <Route path='/register' element={<Register />} />
       <Route path='' element={<PrivateRoute />}>
         <Route path='/order/:id' element={<OrderDetails />} />
+        <Route path='/profile' element={<Profile />} />
       </Route>
     </Route>
   )

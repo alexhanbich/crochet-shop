@@ -26,8 +26,17 @@ const ShippingModal = ({ openModal, closeModal }) => {
   }, [openModal]);
 
   const isFormValid = () => {
-    return firstName && lastName && address && city && state && country && zipCode && phone;
-  }
+    return (
+      firstName &&
+      lastName &&
+      address &&
+      city &&
+      state &&
+      country &&
+      zipCode &&
+      phone
+    );
+  };
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -139,6 +148,19 @@ const ShippingModal = ({ openModal, closeModal }) => {
             onChange={(e) => setPhone(e.target.value)}
             required
           />
+        </div>
+        <div className="flex items-start">
+          <div className="flex items-center h-5">
+            <input
+              id="remember"
+              aria-describedby="remember"
+              type="checkbox"
+              className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-2"
+            />
+          </div>
+          <div className="ml-3 text-sm">
+            <label className="text-gray-500">Default Address</label>
+          </div>
         </div>
         <button
           onClick={submitHandler}
