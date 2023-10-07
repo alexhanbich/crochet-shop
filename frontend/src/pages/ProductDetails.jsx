@@ -32,7 +32,7 @@ const ProductDetails = () => {
               ) :
               ( <p className="pb-4 text-gray-500">Out of Stock</p> )}
               <div className="flex text-lg items-center pb-4">
-                <h5 className='font-bold text-gray-900 mr-4'>${ product.price }</h5>
+                <h5 className='font-bold text-gray-900 mr-4'>${ product.price.toFixed(2) }</h5>
                 <Rating value={ product.rating }  />
               </div>
               <p className="pb-8">{ product.description }</p>

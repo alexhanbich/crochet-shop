@@ -61,12 +61,21 @@ const Navbar = () => {
           <hr className="border-transparent mt-1 mr-4 w-5 group-hover:border-black" />
         </div>
         {userInfo ? (
-          <div className="group">
-             <Link to="/profile">
-              <LiaUserCircleSolid className="mr-4" />
-            </Link>
-            <hr className="border-transparent mt-1 mr-4 w-5 group-hover:border-black" />
-          </div>
+          userInfo.isAdmin ? (
+            <div className="group">
+              <Link to="/admin/profile">
+                <LiaUserCircleSolid className="mr-4" />
+              </Link>
+              <hr className="border-transparent mt-1 mr-4 w-5 group-hover:border-black" />
+            </div>
+          ) : (
+            <div className="group">
+              <Link to="/profile">
+                <LiaUserCircleSolid className="mr-4" />
+              </Link>
+              <hr className="border-transparent mt-1 mr-4 w-5 group-hover:border-black" />
+            </div>
+          )
         ) : (
           <div className="group">
             <Link to="/login">

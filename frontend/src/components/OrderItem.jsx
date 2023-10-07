@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { date } from "../utils/utils";
 
 const OrderItem = (props) => {
-  const { order } = props;
+  const { order, isAdmin } = props;
   const orderItems =
     order.orderItems.length > 3
       ? order.orderItems.slice(0, 2)
@@ -38,6 +38,7 @@ const OrderItem = (props) => {
               <div className="text-gray-500">In Progress</div>
             </div>
           )}
+          {isAdmin && <div className="flex items-center">{order.user.name}</div>}
         </div>
         <div className="flex">
           {orderItems.map((item) => {

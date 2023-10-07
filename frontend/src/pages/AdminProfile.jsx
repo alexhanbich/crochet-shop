@@ -5,9 +5,9 @@ import { useLogoutMutation } from "../slices/usersApiSlice";
 import { logout } from "../slices/authSlice";
 import { resetCart } from "../slices/cartSlice";
 import EditProfile from "../components/EditProfile";
-import OrderList from "../components/OrderList";
+import AdminOrderList from "../components/AdminOrderList";
 
-const Profile = () => {
+const AdminProfile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -23,7 +23,7 @@ const Profile = () => {
       console.error(err);
     }
   };
-  let [currentComponent, setCurrentComponent] = useState(<OrderList />);
+  let [currentComponent, setCurrentComponent] = useState(<AdminOrderList />);
   let [currentString, setCurrentString] = useState("orders");
   let bgProfileAccent = currentString === "edit" ? "bg-accent" : "bg-secondary";
   let bgOrdersAccent =
@@ -37,10 +37,10 @@ const Profile = () => {
             className={`w-full p-2 pl-4 text-left ${bgOrdersAccent}`}
             onClick={() => {
               setCurrentString("orders");
-              setCurrentComponent(<OrderList />);
+              setCurrentComponent(<AdminOrderList />);
             }}
           >
-            Past Orders
+            Orders
           </button>
         </li>
         <li>
@@ -51,7 +51,18 @@ const Profile = () => {
               setCurrentComponent(<EditProfile />);
             }}
           >
-            Edit Profile
+            Products
+          </button>
+        </li>
+        <li>
+          <button
+            className={`w-full p-2 pl-4 text-left ${bgProfileAccent}`}
+            onClick={() => {
+              setCurrentString("edit");
+              setCurrentComponent(<EditProfile />);
+            }}
+          >
+            Users
           </button>
         </li>
         <li>
@@ -65,4 +76,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default AdminProfile;

@@ -16,8 +16,10 @@ import ShoppingCart from './pages/ShoppingCart';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import PrivateRoute from './components/PrivateRoute';
+import AdminRoute from './components/AdminRoute';
 import OrderDetails from './pages/OrderDetails';
 import Profile from './pages/Profile';
+import AdminProfile from './pages/AdminProfile';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,6 +32,9 @@ const router = createBrowserRouter(
       <Route path='' element={<PrivateRoute />}>
         <Route path='/order/:id' element={<OrderDetails />} />
         <Route path='/profile' element={<Profile />} />
+      </Route>
+      <Route path='' element={<AdminRoute />}>
+        <Route path='/admin/profile' element={<AdminProfile />} />
       </Route>
     </Route>
   )

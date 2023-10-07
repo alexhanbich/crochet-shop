@@ -1,5 +1,8 @@
 import { Link, useParams } from "react-router-dom";
-import { useGetOrderDetailsQuery } from "../slices/ordersApiSlice";
+import {
+  useGetOrderDetailsQuery,
+  useDeliverOrderMutation,
+} from "../slices/ordersApiSlice";
 import CartItem from "../components/CartItem";
 import { date } from "../utils/utils";
 
@@ -13,7 +16,10 @@ const OrderDetails = () => {
     isLoading,
     error,
   } = useGetOrderDetailsQuery(orderId);
-  console.log(order);
+
+  const [deliverOrder, { isLoading: loadingDeliver }] =
+    useDeliverOrderMutation();
+
   const orderItems = order?.orderItems;
   return isLoading ? (
     <p>loading</p>
