@@ -44,7 +44,7 @@ const EditProfile = () => {
   }
   return (
     <div className="space-y-4 w-[480px] mt-12 ml-16">
-      <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900">
+      <h1 className="text-xl font-bold text-gray-900">
         Edit Profile
       </h1>
       <form className="space-y-4" noValidate onSubmit="">

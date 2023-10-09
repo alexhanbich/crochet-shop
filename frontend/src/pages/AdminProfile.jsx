@@ -6,6 +6,8 @@ import { logout } from "../slices/authSlice";
 import { resetCart } from "../slices/cartSlice";
 import EditProfile from "../components/EditProfile";
 import AdminOrderList from "../components/AdminOrderList";
+import AdminProductList from "../components/AdminProductList";
+import AdminUserList from "../components/AdminUserList";
 
 const AdminProfile = () => {
   const dispatch = useDispatch();
@@ -25,9 +27,10 @@ const AdminProfile = () => {
   };
   let [currentComponent, setCurrentComponent] = useState(<AdminOrderList />);
   let [currentString, setCurrentString] = useState("orders");
-  let bgProfileAccent = currentString === "edit" ? "bg-accent" : "bg-secondary";
   let bgOrdersAccent =
     currentString === "orders" ? "bg-accent" : "bg-secondary";
+    let bgProductAccent = currentString === "products" ? "bg-accent" : "bg-secondary";
+    let bgUserAccent = currentString === "users" ? "bg-accent" : "bg-secondary";
 
   return (
     <div className="flex">
@@ -45,10 +48,10 @@ const AdminProfile = () => {
         </li>
         <li>
           <button
-            className={`w-full p-2 pl-4 text-left ${bgProfileAccent}`}
+            className={`w-full p-2 pl-4 text-left ${bgProductAccent}`}
             onClick={() => {
-              setCurrentString("edit");
-              setCurrentComponent(<EditProfile />);
+              setCurrentString("products");
+              setCurrentComponent(<AdminProductList />);
             }}
           >
             Products
@@ -56,10 +59,10 @@ const AdminProfile = () => {
         </li>
         <li>
           <button
-            className={`w-full p-2 pl-4 text-left ${bgProfileAccent}`}
+            className={`w-full p-2 pl-4 text-left ${bgUserAccent}`}
             onClick={() => {
-              setCurrentString("edit");
-              setCurrentComponent(<EditProfile />);
+              setCurrentString("users");
+              setCurrentComponent(<AdminUserList />);
             }}
           >
             Users

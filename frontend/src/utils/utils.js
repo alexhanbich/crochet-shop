@@ -19,6 +19,5 @@ export const updateCart = (state) => {
 };
 
 export const date = (dateStr) => {
-  return new Date(dateStr).toLocaleString();
-
+  return new Date(dateStr).toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute:'2-digit'});;
 }

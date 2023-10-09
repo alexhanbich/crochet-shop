@@ -20,20 +20,43 @@ const OrderDetails = () => {
   const [deliverOrder, { isLoading: loadingDeliver }] =
     useDeliverOrderMutation();
 
+  const deliverHandler = async () => {
+    await deliverOrder(orderId);
+    refetch();
+  };
+
   const orderItems = order?.orderItems;
   return isLoading ? (
     <p>loading</p>
   ) : (
     <div className="mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-black mb-8">Order #{order._id}</h1>
+      <div className="flex space-x-8">
+        <h1 className="text-3xl font-bold text-black mb-8">
+          Order #{order._id}
+        </h1>
+        <button
+          className="bg-black px-2 text-white border rounded-xl mb-8 disabled:bg-gray-500 hover:bg-gray-500"
+          onClick={deliverHandler}
+          disabled={order.isDelivered}
+        >
+          Mark as Delivered
+        </button>
+      </div>
+
       <div className="flex mb-8 space-x-12">
         <div className="text-lg">Order Date: {date(order.createdAt)}</div>
         {order.isDelivered ? (
-          <button className="bg-white px-2 text-green-500 border rounded-xl">
+          <button
+            disabled
+            className="bg-white px-2 text-green-500 border rounded-xl"
+          >
             Delivered
           </button>
         ) : (
-          <button className="bg-white px-2 text-red-500 border rounded-xl">
+          <button
+            disabled
+            className="bg-white px-2 text-red-500 border rounded-xl"
+          >
             Not Delivered
           </button>
         )}
