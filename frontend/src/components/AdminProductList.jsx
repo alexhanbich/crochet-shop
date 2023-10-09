@@ -1,12 +1,7 @@
 import { useState } from "react";
 import AdminProductItem from "./AdminProductItem";
-import { toast } from "react-toastify";
 
-import {
-  useGetProductsQuery,
-  useDeleteProductMutation,
-  useCreateProductMutation,
-} from "../slices/productsApiSlice";
+import { useGetProductsQuery } from "../slices/productsApiSlice";
 
 import { LiaPlusCircleSolid } from "react-icons/lia";
 import ProductModal from "./ProductModal";
@@ -16,17 +11,8 @@ const AdminProductList = () => {
 
   const [openModal, setOpenModal] = useState(false);
 
-  const [createProduct, { isLoading: loadingCreate }] =
-    useCreateProductMutation();
-
   const createProductHandler = async () => {
     setOpenModal(true);
-    // try {
-    //   await createProduct();
-    //   refetch();
-    // } catch (err) {
-    //   toast.error(err?.data?.message || err.error);
-    // }
   };
 
   return isLoading ? (
@@ -44,9 +30,11 @@ const AdminProductList = () => {
         <ProductModal
           openModal={openModal}
           closeModal={() => setOpenModal(false)}
+          isCreate={true}
+          refetch={refetch}
         />
       </div>
-      
+
       <table className="table-auto w-full text-left border">
         <thead className="border">
           <tr>
@@ -57,7 +45,13 @@ const AdminProductList = () => {
         </thead>
         <tbody className="border">
           {products?.map((product) => {
-            return <AdminProductItem key={product._id} product={product} />;
+            return (
+              <AdminProductItem
+                key={product._id}
+                product={product}
+                refetch={refetch}
+              />
+            );
           })}
         </tbody>
       </table>
