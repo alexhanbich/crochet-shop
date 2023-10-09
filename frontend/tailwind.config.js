@@ -16,6 +16,9 @@ module.exports = {
         'logo': ['Amita','sans-serif'],
         'body': ['Roboto Light','sans-serif'],
       },
+      gridTemplateColumns: {
+        'fluid': 'repeat(auto-fit, minmax(16rem, 1fr))',
+      }
     },
   },
   plugins: [],

@@ -23,7 +23,7 @@ const Home = () => {
               </div>
             </div>
             <div className="flex justify-center items-center text-3xl pt-12">Products</div>
-            <div className="bg-white pt-6 flex flex-wrap justify-around gap-8">
+            <div className="bg-white pt-6 grid grid-cols-fluid gap-8">
               {products.map((product) => (
                 <Product key={product._id} product={product} />
               ))}

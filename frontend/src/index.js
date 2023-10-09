@@ -20,6 +20,7 @@ import AdminRoute from './components/AdminRoute';
 import OrderDetails from './pages/OrderDetails';
 import Profile from './pages/Profile';
 import AdminProfile from './pages/AdminProfile';
+import Favorites from './pages/Favorites';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -27,6 +28,7 @@ const router = createBrowserRouter(
       <Route index={ true } path='/' element={ <Home />} />
       <Route path='/product/:id' element={<ProductDetails />} />
       <Route path='/cart' element={<ShoppingCart />} />
+      <Route path='/favorites' element={<Favorites />} />
       <Route path='/login' element={<Login />} />
       <Route path='/register' element={<Register />} />
       <Route path='' element={<PrivateRoute />}>

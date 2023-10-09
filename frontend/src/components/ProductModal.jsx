@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from "react";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
 import { GrFormClose } from "react-icons/gr";
 
 import {
@@ -33,6 +32,7 @@ const ProductModal = ({
     useUploadProductImageMutation();
 
   const uploadHandler = async (e) => {
+    e.preventDefault();
     const formData = new FormData();
     formData.append("image", e.target.files[0]);
     try {
@@ -140,7 +140,7 @@ const ProductModal = ({
             onChange={(e) => setImage(e.target.value)}
             readOnly
           />
-          <input type="file" onChange={uploadHandler} required />
+          <input type="file" key={Date.now()} onChange={uploadHandler} required />
         </div>
         <div>
           <label>Product Description:</label>

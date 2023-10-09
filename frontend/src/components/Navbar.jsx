@@ -5,28 +5,9 @@ import {
   LiaUserCircleSolid,
 } from "react-icons/lia";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { useLogoutMutation } from "../slices/usersApiSlice";
-import { logout } from "../slices/authSlice";
-import { resetCart } from "../slices/cartSlice";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const [logoutApiCall] = useLogoutMutation();
-
-  const logoutHandler = async () => {
-    try {
-      await logoutApiCall().unwrap();
-      dispatch(logout());
-      dispatch(resetCart());
-      navigate("/login");
-    } catch (err) {
-      console.error(err);
-    }
-  };
   const { cartItems } = useSelector((state) => state.cart);
   const { userInfo } = useSelector((state) => state.auth);
   return (
@@ -42,7 +23,7 @@ const Navbar = () => {
       </Link>
       <div className="flex justify-self-end mt-4">
         <div className="group">
-          <Link to="/">
+          <Link to="/favorites">
             <LiaHeart className="mr-4 text-red-800" />
           </Link>
           <hr className="border-transparent mt-1 mr-4 w-5 group-hover:border-black" />

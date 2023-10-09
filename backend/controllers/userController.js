@@ -70,7 +70,6 @@ const updateProfileUser = asyncHandler(async (req, res) => {
   if (user) {
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
-    console.log(req.body);
     if (req.body.password) {
       user.password = req.body.password;
     }
@@ -108,7 +107,6 @@ const updateUser = asyncHandler(async (req, res) => {
       user.name = req.body.name || user.name;
       user.email = req.body.email || user.email;
       user.isAdmin = Boolean(req.body.isAdmin);
-  
       const updatedUser = await user.save();
   
       res.json({
@@ -138,6 +136,31 @@ const deleteUser = asyncHandler(async (req, res) => {
     }
 });
 
+const updateUserFavorites = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+  if (user) {
+    if (user.favorites.includes(req.body.favorites)) {
+      res.json({
+        _id: user._id,
+        favorites: user.favorites,
+        didUpdate: false,
+      });
+    }
+    if (req.body.favorites) {
+      user.favorites.push(req.body.favorites);
+    }
+    const updatedUser = await user.save();
+    res.json({
+      _id: updatedUser._id,
+      favorites: updatedUser.favorites,
+      didUpdate: true,
+    });
+  } else {
+    res.status(404);
+    throw new Error('User not found');
+  }
+});
+
 export {
   registerUser,
   loginUser,
@@ -148,4 +171,5 @@ export {
   getUserById,
   updateUser,
   deleteUser,
+  updateUserFavorites,
 };
