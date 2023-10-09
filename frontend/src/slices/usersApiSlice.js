@@ -66,6 +66,14 @@ export const usersApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["User"],
     }),
+    removeFavorites: builder.mutation({
+      query: (data) => ({
+        url: `${USERS_URL}/favorites/${data.userId}`,
+        method: "DELETE",
+        body: data,
+      }),
+      invalidatesTags: ["User"],
+    }),
   }),
 });
 
@@ -79,4 +87,5 @@ export const {
   useUpdateUserMutation,
   useGetUserDetailsQuery,
   useUpdateFavoritesMutation,
+  useRemoveFavoritesMutation,
 } = usersApiSlice;

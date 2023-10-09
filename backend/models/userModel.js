@@ -34,7 +34,6 @@ userSchema.methods.verifyPassword = async function (password) {
 };
 userSchema.pre('save', async function (next) { 
     if (!this.isModified('password')) {
-        console.log("should not hit")
         next();
     }
     const salt = await bcrypt.genSalt(10);

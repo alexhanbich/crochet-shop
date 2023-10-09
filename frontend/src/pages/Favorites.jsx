@@ -8,6 +8,7 @@ const Favorites = () => {
     data: products,
     isLoading,
     error,
+    refetch,
   } = useGetFavoriteProductsQuery(userInfo._id);
 
   return (
@@ -21,7 +22,11 @@ const Favorites = () => {
           </div>
           <hr className="w-4/5 mx-auto" />
           {products.map((product) => (
-            <FavoriteItem key={product._id} product={product} />
+            <FavoriteItem
+              key={product._id}
+              product={product}
+              refetch={refetch}
+            />
           ))}
         </div>
       )}

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom';
 import Navbar from './components/Navbar'
-import { ToastContainer } from 'react-toastify'
+import { ToastContainer, Flip } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import Footer from './components/Footer';
 
@@ -13,7 +13,7 @@ const App = () => {
         <main>
           <Outlet />
         </main>
-        <ToastContainer />
+        <ToastContainer className="text-sm" transition={Flip} style={{ width: "200px" }} />
         <Footer />
       </div>     
     </>

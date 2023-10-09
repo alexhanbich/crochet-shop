@@ -28,18 +28,16 @@ const ProductDetails = () => {
         userId: userInfo._id,
         favorites: id,
       }).unwrap();
-      console.log(res);
       if (res.didUpdate) {
-        toast.success("Added to Favorites.");
-      }
-      else {
-        toast.warning("Already in Favorites.");
+        toast.success("Added to favorites.");
+      } else {
+        toast.warning("Already in favorites.");
       }
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }
   };
-  
+
   return (
     <>
       {isLoading ? (

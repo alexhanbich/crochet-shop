@@ -92,48 +92,68 @@ const getAllUsers = asyncHandler(async (req, res) => {
 });
 
 const getUserById = asyncHandler(async (req, res) => {
-    const user = await User.findById(req.params.id).select('-password');
-    if (user) {
-      res.json(user);
-    } else {
-      res.status(404);
-      throw new Error('User not found');
-    }
+  const user = await User.findById(req.params.id).select("-password");
+  if (user) {
+    res.json(user);
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
 });
 
 const updateUser = asyncHandler(async (req, res) => {
-    const user = await User.findById(req.params.id);
-    if (user) {
-      user.name = req.body.name || user.name;
-      user.email = req.body.email || user.email;
-      user.isAdmin = Boolean(req.body.isAdmin);
-      const updatedUser = await user.save();
-  
-      res.json({
-        _id: updatedUser._id,
-        name: updatedUser.name,
-        email: updatedUser.email,
-        isAdmin: updatedUser.isAdmin,
-      });
-    } else {
-      res.status(404);
-      throw new Error('User not found');
-    }
+  const user = await User.findById(req.params.id);
+  if (user) {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    user.isAdmin = Boolean(req.body.isAdmin);
+    const updatedUser = await user.save();
+
+    res.json({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      isAdmin: updatedUser.isAdmin,
+    });
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
 });
 
 const deleteUser = asyncHandler(async (req, res) => {
-    const user = await User.findById(req.params.id);
-    if (user) {
-      if (user.isAdmin) {
-        res.status(400);
-        throw new Error('Can not delete admin user');
-      }
-      await User.deleteOne({ _id: user._id });
-      res.json({ message: 'User removed' });
+  const user = await User.findById(req.params.id);
+  if (user) {
+    if (user.isAdmin) {
+      res.status(400);
+      throw new Error("Can not delete admin user");
+    }
+    await User.deleteOne({ _id: user._id });
+    res.json({ message: "User removed" });
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
+});
+
+const removeUserFavorites = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+  if (user) {
+    let index = user.favorites.indexOf(req.body.favorites);
+    if (index !== -1) {
+      console.log(user.favorites[index]) 
+      user.favorites.splice(index, 1);
+      const updatedUser = await user.save();
+      res.json({
+        _id: updatedUser._id,
+        favorites: updatedUser.favorites,
+        didUpdate: true,
+      });
     } else {
       res.status(404);
-      throw new Error('User not found');
+      throw new Error("Item not in favorites.");
     }
+  }
 });
 
 const updateUserFavorites = asyncHandler(async (req, res) => {
@@ -157,7 +177,7 @@ const updateUserFavorites = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(404);
-    throw new Error('User not found');
+    throw new Error("User not found");
   }
 });
 
@@ -171,5 +191,6 @@ export {
   getUserById,
   updateUser,
   deleteUser,
+  removeUserFavorites,
   updateUserFavorites,
 };
