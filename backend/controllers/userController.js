@@ -158,6 +158,9 @@ const removeUserFavorites = asyncHandler(async (req, res) => {
 });
 
 const getUserFavorites = asyncHandler(async (req, res) => {
+  if (req.params.id === 'loading') {
+    return res.json("");
+  }
   const user = await User.findById(req.params.id);
   const products = await Product.find({ _id: { $in: user.favorites } });
   if (!products) {

@@ -5,17 +5,24 @@ import {
   LiaUserCircleSolid,
 } from "react-icons/lia";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { useGetFavoritesQuery } from "../slices/usersApiSlice";
+import { updateLocalFavorites } from "../slices/cartSlice";
 
 const Navbar = () => {
   const { cartItems, favoriteItems } = useSelector((state) => state.cart);
   const { userInfo } = useSelector((state) => state.auth);
+  const { data: favoriteProducts, isLoading, error } = useGetFavoritesQuery(userInfo?._id || 'loading');
+
+  const dispatch = useDispatch();
   useEffect(() => {
-    if (userInfo) {
-      console.log("fetch data!")
+    console.log("pro", favoriteProducts)
+    console.log("item", favoriteItems)
+    if (userInfo && favoriteProducts) {
+      dispatch(updateLocalFavorites([...favoriteProducts]))
     }
-  }, [userInfo]);
+  }, [userInfo, favoriteProducts]);
 
   return (
     <nav className="grid grid-cols-3 w-full text-xl pt-4 pb-4 full-bleed-accent bg-primary">
