@@ -162,7 +162,7 @@ const getUserFavorites = asyncHandler(async (req, res) => {
     return res.json("");
   }
   const user = await User.findById(req.params.id);
-  const products = await Product.find({ _id: { $in: user.favorites } });
+  const products = await Product.find({ _id: { $in: user.favorites.map((i)=> i._id) } });
   if (!products) {
     return res.status(404).json({ message: "Products not found." });
   }

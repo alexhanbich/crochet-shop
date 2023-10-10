@@ -28,9 +28,13 @@ const ProductDetails = () => {
     dispatch(addToFavorites({ ...product }))
     if (userInfo) {
       try {
-        const res = await updateFavorites({
+        let newFavoriteItems = [...favoriteItems];
+        if (!favoriteItems.includes(product)) {
+          newFavoriteItems = [...favoriteItems, product];
+        }
+        await updateFavorites({
           userId: userInfo._id,
-          favoriteItems: [...favoriteItems, product],
+          favoriteItems: newFavoriteItems,
         });
       } catch (err) {
         toast.error(err?.data?.message || err.error);

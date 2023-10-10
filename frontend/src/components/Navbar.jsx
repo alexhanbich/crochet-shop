@@ -17,12 +17,10 @@ const Navbar = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log("pro", favoriteProducts)
-    console.log("item", favoriteItems)
     if (userInfo && favoriteProducts) {
       dispatch(updateLocalFavorites([...favoriteProducts]))
     }
-  }, [userInfo, favoriteProducts]);
+  }, [userInfo, favoriteProducts, isLoading]);
 
   return (
     <nav className="grid grid-cols-3 w-full text-xl pt-4 pb-4 full-bleed-accent bg-primary">
