@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../slices/cartSlice";
+import { addToCart, removeFromFavorites} from "../slices/cartSlice";
 import { LiaTrashAlt, LiaShoppingBagSolid } from "react-icons/lia";
 import { useRemoveFavoritesMutation } from "../slices/usersApiSlice";
 import { toast } from "react-toastify";
@@ -19,6 +19,7 @@ const FavoriteItem = ({ product, refetch }) => {
     useRemoveFavoritesMutation();
 
   const removeFromFavoritesHandler = async (productId) => {
+    dispatch(removeFromFavorites({ ...product }))
     try {
       const res = await removeFavorites({
         userId: userInfo._id,

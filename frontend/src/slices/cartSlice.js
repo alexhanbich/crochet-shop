@@ -36,7 +36,6 @@ const cartSlice = createSlice({
     },
     addToFavorites: (state, action) => {
       const item = action.payload;
-      console.log("payload", action.payload)
       const duplicateItem = state.favoriteItems.find((i) => i._id === item._id);
       if (duplicateItem) {
           toast.warning("Item already in favorites.");
@@ -51,9 +50,10 @@ const cartSlice = createSlice({
       localStorage.setItem('cart', JSON.stringify(state));
     },
     removeFromFavorites: (state, action) => {
-      state.favoriteItems = state.favoriteItems.filter((i) => i._id !== action.payload);
+      const item = action.payload;
+      state.favoriteItems = state.favoriteItems.filter((i) => i._id !== item._id);
       localStorage.setItem('cart', JSON.stringify(state));
-      toast.success("Item removed from cart.");
+      toast.success("Item removed from favorites.");
     },
     saveShippingAddress: (state, action) => {
       state.shippingAddress = action.payload;

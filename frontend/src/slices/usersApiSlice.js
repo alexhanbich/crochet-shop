@@ -75,7 +75,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
     }),
     removeFavorites: builder.mutation({
       query: (data) => ({
-        url: `${USERS_URL}/favorites${data.userId}`,
+        url: `${USERS_URL}/favorites/${data.userId}`,
         method: "DELETE",
         body: data,
       }),

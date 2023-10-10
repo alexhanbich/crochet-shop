@@ -138,7 +138,6 @@ const deleteUser = asyncHandler(async (req, res) => {
 });
 
 const removeUserFavorites = asyncHandler(async (req, res) => {
-  console.log("hit!!");
   const user = await User.findById(req.body.userId);
   if (user) {
     let index = user.favorites.indexOf(req.body.favoriteId);
