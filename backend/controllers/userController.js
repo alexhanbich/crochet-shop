@@ -159,21 +159,11 @@ const removeUserFavorites = asyncHandler(async (req, res) => {
 const updateUserFavorites = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
   if (user) {
-    if (user.favorites.includes(req.body.favorites)) {
-      res.json({
-        _id: user._id,
-        favorites: user.favorites,
-        didUpdate: false,
-      });
-    }
-    if (req.body.favorites) {
-      user.favorites.push(req.body.favorites);
-    }
+    user.favorites = req.body.favorites;
     const updatedUser = await user.save();
     res.json({
       _id: updatedUser._id,
       favorites: updatedUser.favorites,
-      didUpdate: true,
     });
   } else {
     res.status(404);

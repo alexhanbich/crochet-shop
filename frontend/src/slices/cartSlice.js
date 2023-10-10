@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 const cartItems = localStorage.getItem("cart");
 const initialState = cartItems
   ? JSON.parse(cartItems)
-  : { cartItems: [], shippingAddress: {}, paymentMethod: "PayPal" };
+  : { cartItems: [], favoriteItems: [], shippingAddress: {}, paymentMethod: "PayPal" };
 
 const cartSlice = createSlice({
   name: "cart",
@@ -23,18 +23,30 @@ const cartSlice = createSlice({
         } else {
           toast.success("Item updated to cart.");
         }
-        
       } else {
         state.cartItems = [...state.cartItems, item];
         toast.success("Item added to cart.");
       }
-      
       return updateCart(state);
     },
     removeFromCart: (state, action) => {
       state.cartItems = state.cartItems.filter((i) => i._id !== action.payload);
       toast.success("Item removed from cart.");
       return updateCart(state);
+    },
+    addToFavorites: (state, action) => {
+      const item = action.payload;
+      const duplicateItem = state.favoriteItems.find((i) => i._id === item._id);
+      if (duplicateItem) {
+          toast.warning("Item already in favorites.");
+      } else {
+        state.favoriteItems = [...state.favoriteItems, item];
+        toast.success("Item added to favorites.");
+      }
+    },
+    removeFromFavorites: (state, action) => {
+      state.favoriteItems = state.favoriteItems.filter((i) => i._id !== action.payload);
+      toast.success("Item removed from cart.");
     },
     saveShippingAddress: (state, action) => {
       state.shippingAddress = action.payload;
@@ -52,5 +64,5 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addToCart, removeFromCart, saveShippingAddress, savePaymentMethod, clearCartItems, resetCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, addToFavorites, removeFromFavorites, saveShippingAddress, savePaymentMethod, clearCartItems, resetCart } = cartSlice.actions;
 export default cartSlice.reducer;

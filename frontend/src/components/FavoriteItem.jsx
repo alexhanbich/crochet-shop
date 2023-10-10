@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../slices/cartSlice";
 import { LiaTrashAlt, LiaShoppingBagSolid } from "react-icons/lia";
@@ -6,7 +7,7 @@ import { useRemoveFavoritesMutation } from "../slices/usersApiSlice";
 import { toast } from "react-toastify";
 import Rating from "./Rating";
 
-const FavoriteItem = ({product, refetch}) => {
+const FavoriteItem = ({ product, refetch }) => {
   const dispatch = useDispatch();
   const addToCartHandler = async (item, cnt) => {
     dispatch(addToCart({ ...item, cnt }));
@@ -42,12 +43,11 @@ const FavoriteItem = ({product, refetch}) => {
           className="h-32 w-32 rounded object-cover"
         />
         <div>
-          <h3
-            className="text-lg text-gray-700 hover:cursor-pointer hover:underline"
-            onClick={() => {}}
-          >
-            {product.name}
-          </h3>
+          <Link to={`/product/${product._id}`}>
+            <h3 className="text-lg text-gray-700 hover:cursor-pointer hover:underline">
+              {product.name}
+            </h3>
+          </Link>
         </div>
         <h5 className="text-lg text-center font-bold text-gray-900">
           ${product.price.toFixed(2)}

@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useGetProductDetailsQuery } from "../slices/productsApiSlice";
 import { useUpdateFavoritesMutation } from "../slices/usersApiSlice";
-import { addToCart } from "../slices/cartSlice";
+import { addToCart, addToFavorites } from "../slices/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Rating from "../components/Rating";
 import { useState } from "react";
@@ -15,6 +15,9 @@ const ProductDetails = () => {
 
   const { userInfo } = useSelector((state) => state.auth);
 
+  const cart = useSelector((state) => state.cart);
+  let favoriteItems = cart.favoriteItems;
+
   const [updateFavorites, { isLoading: loadingUpdateFavorites }] =
     useUpdateFavoritesMutation();
 
@@ -23,18 +26,17 @@ const ProductDetails = () => {
   };
 
   const addToFavoritesHandler = async () => {
-    try {
-      const res = await updateFavorites({
-        userId: userInfo._id,
-        favorites: id,
-      }).unwrap();
-      if (res.didUpdate) {
-        toast.success("Added to favorites.");
-      } else {
-        toast.warning("Already in favorites.");
+    dispatch(addToFavorites({ ...product }));
+    
+    if (userInfo) {
+      try {
+        await updateFavorites({
+          userId: userInfo._id,
+          favorites: favoriteItems,
+        });
+      } catch (err) {
+        toast.error(err?.data?.message || err.error);
       }
-    } catch (err) {
-      toast.error(err?.data?.message || err.error);
     }
   };
 

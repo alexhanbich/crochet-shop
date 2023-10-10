@@ -8,6 +8,8 @@ import { toast } from "react-toastify";
 
 const Product = ({ product }) => {
   const { userInfo } = useSelector((state) => state.auth);
+  const cart = useSelector((state) => state.cart);
+  let favoriteItems = cart.favoriteItems;
   const [updateFavorites, { isLoading: loadingUpdateFavorites }] =
     useUpdateFavoritesMutation();
 
@@ -35,8 +37,8 @@ const Product = ({ product }) => {
   };
   return (
     <div>
-      <div className="flex flex-col border w-64 mx-auto group overflow-hidden">
-        <div className="relative flex h-64 w-64">
+      <div className="flex flex-col border w-56 mx-auto group overflow-hidden">
+        <div className="relative flex h-56 w-56">
           <Link to={`/product/${product._id}`}>
             <img
               className="absolute top-0 right-0 h-full w-full object-cover"
@@ -44,15 +46,15 @@ const Product = ({ product }) => {
               alt="img"
             />
           </Link>
-          <div className="absolute -right-11 bottom-3 space-y-3 transition-all duration-500 group-hover:right-3">
+          <div className="absolute text-bold -right-11 bottom-3 space-y-3 transition-all duration-500 group-hover:right-3">
             <button
-              className="flex h-8 w-8 items-center justify-center bg-transparent text-red-800 transition hover:bg-gray-200"
+              className="flex h-8 w-8 items-center justify-center bg-secondary text-red-800 transition hover:bg-accent"
               onClick={addToFavoritesHandler}
             >
               <LiaHeart />
             </button>
             <button
-              className="flex h-8 w-8 items-center justify-center bg-transparent text-black transition hover:bg-gray-200"
+              className="flex h-8 w-8 items-center justify-center bg-secondary text-black transition hover:bg-accent"
               onClick={addToCartHandler}
             >
               <LiaShoppingBagSolid />
@@ -60,15 +62,15 @@ const Product = ({ product }) => {
           </div>
         </div>
 
-        <div className="mx-5 my-3">
+        <div className="mx-5">
           <Link to={`/product/${product._id}`}>
-            <div className="flex justify-between">
+            <div className="flex justify-between space-y-1">
               <h5 className="w-3/4 truncate text-gray-700 mt-1">
                 {product.name}
               </h5>
               <Rating value={product.rating} />
             </div>
-            <h5 className="text-lg text-center font-bold text-gray-900 mt-1">
+            <h5 className="text-center font-bold text-gray-900 mb-2">
               ${product.price.toFixed(2)}
             </h5>
           </Link>

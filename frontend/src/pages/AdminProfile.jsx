@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useLogoutMutation } from "../slices/usersApiSlice";
 import { logout } from "../slices/authSlice";
 import { resetCart } from "../slices/cartSlice";
-import EditProfile from "../components/EditProfile";
 import AdminOrderList from "../components/AdminOrderList";
 import AdminProductList from "../components/AdminProductList";
 import AdminUserList from "../components/AdminUserList";
@@ -18,8 +17,8 @@ const AdminProfile = () => {
   const logoutHandler = async () => {
     try {
       await logoutApiCall().unwrap();
-      dispatch(logout());
       dispatch(resetCart());
+      dispatch(logout());
       navigate("/login");
     } catch (err) {
       console.error(err);
