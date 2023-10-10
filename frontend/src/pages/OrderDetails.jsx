@@ -55,7 +55,7 @@ const OrderDetails = () => {
         ) : (
           <button
             disabled
-            className="bg-white px-2 text-red-500 border rounded-xl"
+            className="bg-white px-2 text-red border rounded-xl"
           >
             Not Delivered
           </button>
@@ -65,7 +65,7 @@ const OrderDetails = () => {
       <div className="text-2xl pb-4">Your Items</div>
       <div className="flex justify-between">
         <div className="w-3/5 space-y-4 gap-x-8">
-          <hr />
+          <hr className="text-lightgray"  />
           {orderItems.map((product) => {
             return (
               <CartItem key={product._id} product={product} canEdit={false} />
@@ -112,21 +112,21 @@ const OrderDetails = () => {
                       .toFixed(2)}
                   </dd>
                 </div>
-                <hr />
+                <hr className="text-lightgray"  />
                 <div className="flex justify-between">
                   <dt className="text-gray-500">Shipping</dt>
                   <dd className="text-sm text-gray-500">
                     ${order.shippingPrice.toFixed(2)}
                   </dd>
                 </div>
-                <hr />
+                <hr className="text-lightgray"  />
                 <div className="flex justify-between">
                   <dt className="text-gray-500">Tax</dt>
                   <dd className="text-sm text-gray-500">
                     ${order.taxPrice.toFixed(2)}
                   </dd>
                 </div>
-                <hr />
+                <hr className="text-lightgray"  />
                 <div className="flex justify-between text-black text-lg">
                   <dt className="">Total</dt>
                   <dd>${order.totalPrice.toFixed(2)}</dd>

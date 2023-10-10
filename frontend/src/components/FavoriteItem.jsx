@@ -35,7 +35,7 @@ const FavoriteItem = ({ product, refetch }) => {
     }
   };
   return (
-    <div className="w-4/5 mx-auto">
+    <div className="mx-auto">
       <div className="grid grid-cols-5 items-center justify-center gap-8">
         <img
           src={product.image}
@@ -59,12 +59,12 @@ const FavoriteItem = ({ product, refetch }) => {
             onClick={() => addToCartHandler(product, Number(1))}
           />
           <LiaTrashAlt
-            className="text-xl text-red-600 hover:text-red-800 hover:cursor-pointer"
+            className="text-xl text-red hover:text-red hover:cursor-pointer"
             onClick={() => removeFromFavoritesHandler(product._id)}
           />
         </div>
       </div>
-      <hr />
+      <hr className="text-lightgray" />
     </div>
   );
 };

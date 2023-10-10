@@ -40,12 +40,12 @@ const CartItem = (props) => {
             })}
           </select>
 
-          <button className="text-xl text-gray-600 transition hover:text-red-600">
+          <button className="text-xl text-gray-600 transition hover:text-red">
             <LiaTrashAlt onClick={() => removeFromCartHandler(product._id)} />
           </button>
         </div>
       </div>
-      <hr />
+      <hr className="text-lightgray"/>
     </div>
   );
 };

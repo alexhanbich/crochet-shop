@@ -25,9 +25,9 @@ const Profile = () => {
   };
   let [currentComponent, setCurrentComponent] = useState(<OrderList />);
   let [currentString, setCurrentString] = useState("orders");
-  let bgProfileAccent = currentString === "edit" ? "bg-accent" : "bg-secondary";
+  let bgProfileAccent = currentString === "edit" ? "bg-primary" : "bg-secondary";
   let bgOrdersAccent =
-    currentString === "orders" ? "bg-accent" : "bg-secondary";
+    currentString === "orders" ? "bg-primary" : "bg-secondary";
 
   return (
     <div className="flex">

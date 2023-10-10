@@ -29,7 +29,7 @@ const OrderItem = (props) => {
           </div>
           {order.isDelivered ? (
             <div className="flex items-center space-x-2">
-              <span className="h-2 w-2 rounded-full bg-green-700 inline-block"></span>
+              <span className="h-2 w-2 rounded-full bg-green inline-block"></span>
               <div className="text-gray-500">Delivered</div>
             </div>
           ) : (
@@ -52,7 +52,7 @@ const OrderItem = (props) => {
           })}
         </div>
       </div>
-      <hr />
+      <hr className="text-lightgray" />
     </div>
   );
 };

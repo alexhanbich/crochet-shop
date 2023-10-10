@@ -40,7 +40,7 @@ const AdminProductList = () => {
           <tr>
             <th className="pl-1">Product #</th>
             <th>Name</th>
-            <th className="col-span-2">Price</th>
+            <th>Price</th>
           </tr>
         </thead>
         <tbody className="border">

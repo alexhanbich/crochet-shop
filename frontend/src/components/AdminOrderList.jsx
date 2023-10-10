@@ -16,7 +16,7 @@ const AdminOrderList = () => {
           <tr>
             <th className="px-2">Order #</th>
             <th className="px-2">Name</th>
-            <th className="px-2 col-span-2">Date</th>
+            <th className="px-2">Date</th>
             <th className="px-2">Status</th>
           </tr>
         </thead>

@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { useDeleteUserMutation } from "../slices/usersApiSlice";
 import {
   LiaEdit,
@@ -6,11 +6,17 @@ import {
   LiaCheckSolid,
   LiaTimesCircle,
 } from "react-icons/lia";
+import UserModal from "./UserModal";
 import { toast } from "react-toastify";
 
 const AdminUserItem = ({ user, refetch }) => {
+  const [openModal, setOpenModal] = useState(false);
+
+  const editUserHandler = () => {
+    setOpenModal(true);
+  };
+
   const [deleteUser] = useDeleteUserMutation();
-  console.log(user);
   const deleteUserHandler = async (id) => {
     if (window.confirm("Are you sure")) {
       try {
@@ -32,23 +38,23 @@ const AdminUserItem = ({ user, refetch }) => {
         </td>
       ) : (
         <td>
-          <LiaTimesCircle className="text-red-500" />
+          <LiaTimesCircle className="text-red" />
         </td>
       )}
       <td>
         <LiaEdit
           className="text-black text-xl hover:cursor-pointer"
-          onClick={() => {}}
+          onClick={editUserHandler}
         />
-        {/* <div className="m-auto">
-          <ProductModal
-            product={product}
+        <div className="m-auto">
+          <UserModal
+            user={user}
             openModal={openModal}
             closeModal={() => setOpenModal(false)}
             isCreate={false}
             refetch={refetch}
           />
-        </div> */}
+        </div>
       </td>
       <td>
         <LiaTrashAlt

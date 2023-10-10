@@ -47,7 +47,7 @@ const AdminProductItem = ({ product, refetch }) => {
       </td>
       <td>
         <LiaTrashAlt
-          className="text-red-500 text-xl hover:cursor-pointer"
+          className="text-red text-xl hover:cursor-pointer"
           onClick={() => deleteProductHandler(product._id)}
         />
       </td>

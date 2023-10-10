@@ -18,7 +18,7 @@ const AdminOrderItem = (props) => {
       {order.isDelivered ? (
         <td className="px-2 text-green-500">Delivered</td>
       ) : (
-        <td className="px-2 text-red-500">In Progress</td>
+        <td className="px-2 text-red">In Progress</td>
       )}
       <td>
         <LiaEdit

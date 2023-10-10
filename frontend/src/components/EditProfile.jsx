@@ -90,7 +90,7 @@ const EditProfile = () => {
         <button
           type="submit"
           onClick={submitHandler}
-          className="w-full bg-accent hover:outline outline-blue-400 rounded-lg text-sm px-5 py-2.5 text-center"
+          className="w-full bg-primary hover:outline outline-blue-400 rounded-lg text-sm px-5 py-2.5 text-center"
         >
           Update Profile
         </button>

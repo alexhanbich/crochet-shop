@@ -8,10 +8,11 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Navbar = () => {
-  const { cartItems } = useSelector((state) => state.cart);
+  const { cartItems, favoriteItems } = useSelector((state) => state.cart);
   const { userInfo } = useSelector((state) => state.auth);
+  console.log(favoriteItems)
   return (
-    <nav className="grid grid-cols-3 w-full text-xl pt-4 pb-4 full-bleed-accent bg-accent">
+    <nav className="grid grid-cols-3 w-full text-xl pt-4 pb-4 full-bleed-accent bg-primary">
       <Link to="/">
         <div className="group">
           <LiaHomeSolid className="mt-4 ml-4" />
@@ -24,8 +25,15 @@ const Navbar = () => {
       <div className="flex justify-self-end mt-4">
         <div className="group">
           <Link to="/favorites">
-            <LiaHeart className="mr-4 text-red-800" />
+            <LiaHeart className="mr-4 text-red" />
           </Link>
+          {favoriteItems.length > 0 && (
+            <div className="absolute -mt-6 ml-3 w-3 h-3 rounded-full bg-red flex justify-center items-center">
+              <p className="text-xxs text-white">
+                {favoriteItems.length}
+              </p>
+            </div>
+          )}
           <hr className="border-transparent mt-1 mr-4 w-5 group-hover:border-black" />
         </div>
         <div className="group relative">
@@ -33,7 +41,7 @@ const Navbar = () => {
             <LiaShoppingBagSolid className="mr-4" />
           </Link>
           {cartItems.length > 0 && (
-            <div className="absolute -mt-6 ml-3 w-3 h-3 rounded-full bg-red-600 flex justify-center items-center">
+            <div className="absolute -mt-6 ml-3 w-3 h-3 rounded-full bg-red flex justify-center items-center">
               <p className="text-xxs text-white">
                 {cartItems.reduce((i, acc) => i + acc.cnt, 0)}
               </p>

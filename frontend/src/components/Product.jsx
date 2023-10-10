@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { LiaShoppingBagSolid, LiaHeart } from "react-icons/lia";
 import Rating from "./Rating";
 import { useUpdateFavoritesMutation } from "../slices/usersApiSlice";
-import { addToCart } from "../slices/cartSlice";
+import { addToCart, addToFavorites } from "../slices/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
@@ -21,23 +21,21 @@ const Product = ({ product }) => {
   };
 
   const addToFavoritesHandler = async () => {
-    try {
-      const res = await updateFavorites({
-        userId: userInfo._id,
-        favorites: product._id,
-      }).unwrap();
-      if (res.didUpdate) {
-        toast.success("Added to favorites.");
-      } else {
-        toast.warning("Already in favorites.");
+    dispatch(addToFavorites({ ...product }));
+    if (userInfo) {
+      try {
+        await updateFavorites({
+          userId: userInfo._id,
+          favorites: favoriteItems,
+        });
+      } catch (err) {
+        toast.error(err?.data?.message || err.error);
       }
-    } catch (err) {
-      toast.error(err?.data?.message || err.error);
     }
   };
   return (
     <div>
-      <div className="flex flex-col border w-56 mx-auto group overflow-hidden">
+      <div className="flex flex-col border border-lightgray w-56 mx-auto group overflow-hidden">
         <div className="relative flex h-56 w-56">
           <Link to={`/product/${product._id}`}>
             <img
@@ -48,13 +46,13 @@ const Product = ({ product }) => {
           </Link>
           <div className="absolute text-bold -right-11 bottom-3 space-y-3 transition-all duration-500 group-hover:right-3">
             <button
-              className="flex h-8 w-8 items-center justify-center bg-secondary text-red-800 transition hover:bg-accent"
+              className="flex h-8 w-8 items-center justify-center bg-secondary text-red transition hover:bg-primary"
               onClick={addToFavoritesHandler}
             >
               <LiaHeart />
             </button>
             <button
-              className="flex h-8 w-8 items-center justify-center bg-secondary text-black transition hover:bg-accent"
+              className="flex h-8 w-8 items-center justify-center bg-secondary text-black transition hover:bg-primary"
               onClick={addToCartHandler}
             >
               <LiaShoppingBagSolid />
