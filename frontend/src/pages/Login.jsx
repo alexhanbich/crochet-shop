@@ -26,6 +26,7 @@ const Login = () => {
   useEffect(() => {
     if (userInfo) {
       if (products) {
+        console.log(products)
         dispatch(updateLocalFavorites([...products]))
       } else {
         dispatch(updateLocalFavorites([]))

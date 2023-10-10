@@ -26,7 +26,7 @@ const Product = ({ product }) => {
       try {
         await updateFavorites({
           userId: userInfo._id,
-          favorites: favoriteItems,
+          favoriteItems: favoriteItems,
         });
       } catch (err) {
         toast.error(err?.data?.message || err.error);

@@ -25,12 +25,12 @@ const ProductDetails = () => {
   };
 
   const addToFavoritesHandler = async () => {
-    dispatch(addToFavorites({ ...product }));
+    dispatch(addToFavorites({ ...product }))
     if (userInfo) {
       try {
-        await updateFavorites({
+        const res = await updateFavorites({
           userId: userInfo._id,
-          favoriteItems: favoriteItems,
+          favoriteItems: [...favoriteItems, product],
         });
       } catch (err) {
         toast.error(err?.data?.message || err.error);

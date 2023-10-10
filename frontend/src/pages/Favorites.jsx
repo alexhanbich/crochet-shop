@@ -1,8 +1,5 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import FavoriteItem from "../components/FavoriteItem";
-import { updateLocalFavorites } from "../slices/cartSlice";
-import { useGetFavoritesQuery } from "../slices/usersApiSlice";
-import { useState } from "react";
 
 const Favorites = () => {
   const { favoriteItems } = useSelector((state) => state.cart);

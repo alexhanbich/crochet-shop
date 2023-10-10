@@ -168,12 +168,9 @@ const getUserFavorites = asyncHandler(async (req, res) => {
 });
 
 const updateUserFavorites = asyncHandler(async (req, res) => {
-  console.log("hiiiiiit");
   const user = await User.findById(req.params.id);
-  console.log(user);
   if (user) {
-    user.favorites = req.body.favoriteItems;
-    console.log(user.favorites)
+    user.favorites = [...req.body.favoriteItems];
     const updatedUser = await user.save();
     console.log(updatedUser.favorites);
     res.json({
