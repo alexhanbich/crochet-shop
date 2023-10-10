@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLoginMutation } from "../slices/usersApiSlice";
 import { setCredentials } from "../slices/authSlice";
 import { toast } from "react-toastify";
+import { updateLocalFavorites} from "../slices/cartSlice";
+import { useGetFavoritesQuery } from "../slices/usersApiSlice";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -23,15 +25,27 @@ const Login = () => {
 
   useEffect(() => {
     if (userInfo) {
+      if (products) {
+        dispatch(updateLocalFavorites([...products]))
+      } else {
+        dispatch(updateLocalFavorites([]))
+      }
       navigate(redirect);
     }
   }, [navigate, redirect, userInfo]);
+
+  const {
+    data: products,
+    isLoading:loadingFavorite,
+    error,
+  } = useGetFavoritesQuery(userInfo?._id);
 
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
       const res = await login({ email, password }).unwrap();
       dispatch(setCredentials({ ...res }));
+
       navigate(redirect);
     } catch (err) {
         console.log(err)

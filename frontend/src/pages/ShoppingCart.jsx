@@ -25,7 +25,6 @@ const ShoppingCart = () => {
 
   const checkoutHandler = async () => {
     navigate("/login?redirect=cart");
-    console.log(userInfo);
     if (userInfo) {
       try {
         const res = await createOrder({

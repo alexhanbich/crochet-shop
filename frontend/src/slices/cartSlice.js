@@ -44,6 +44,12 @@ const cartSlice = createSlice({
         toast.success("Item added to favorites.");
       }
     },
+    updateLocalFavorites: (state, action) => {
+      console.log("should hitttt`")
+      console.log(action.payload)
+      state.favoriteItems = [...action.payload];
+      localStorage.setItem('cart', JSON.stringify(state));
+    },
     removeFromFavorites: (state, action) => {
       state.favoriteItems = state.favoriteItems.filter((i) => i._id !== action.payload);
       toast.success("Item removed from cart.");
@@ -64,5 +70,5 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addToCart, removeFromCart, addToFavorites, removeFromFavorites, saveShippingAddress, savePaymentMethod, clearCartItems, resetCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, addToFavorites, updateLocalFavorites, removeFromFavorites, saveShippingAddress, savePaymentMethod, clearCartItems, resetCart } = cartSlice.actions;
 export default cartSlice.reducer;

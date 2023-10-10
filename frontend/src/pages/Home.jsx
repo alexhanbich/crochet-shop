@@ -15,14 +15,14 @@ const Home = () => {
           <div className="flex w-full text-2xl py-8 full-bleed-accent bg-primary">
             <div className="w-1/2 h-48 flex">
               <div className="flex flex-col">
-                <h1 className="ml-24 mt-4">HANDMADE CROCHET</h1>
+                <h1 className="ml-24">HANDMADE CROCHET</h1>
                 <p className="ml-24 py-4 text-sm">
                   Welcome to Hangy Shop, your destination for beautifully
                   crafted crochet creations. Explore our unique, handmade items
                   with love in every stitch. Shop with us and experience the
                   artistry of crochet today!
                 </p>
-                <button className="ml-24 text-sm w-32 bg-accent text-gray py-1 mt-2 rounded">View Products {"->"}</button>
+                <button className="ml-24 text-sm w-32 bg-black text-white p-2 mt-2 rounded">View Products {"->"}</button>
               </div>
             </div>
             <div className="flex justify-center w-1/2">

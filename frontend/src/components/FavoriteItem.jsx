@@ -22,7 +22,7 @@ const FavoriteItem = ({ product, refetch }) => {
     try {
       const res = await removeFavorites({
         userId: userInfo._id,
-        favorites: productId,
+        favoriteId: productId,
       }).unwrap();
       if (res.didUpdate) {
         toast.success("Removed from favorites.");

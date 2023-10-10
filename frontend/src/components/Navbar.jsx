@@ -10,7 +10,6 @@ import { useSelector } from "react-redux";
 const Navbar = () => {
   const { cartItems, favoriteItems } = useSelector((state) => state.cart);
   const { userInfo } = useSelector((state) => state.auth);
-  console.log(favoriteItems)
   return (
     <nav className="grid grid-cols-3 w-full text-xl pt-4 pb-4 full-bleed-accent bg-primary">
       <Link to="/">

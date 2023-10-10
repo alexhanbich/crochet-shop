@@ -34,7 +34,6 @@ const EditProfile = () => {
           email,
           password,
         }).unwrap();
-        console.log(res)
         dispatch(setCredentials({ ...res }));
         toast.success('Profile updated successfully');
       } catch (err) {

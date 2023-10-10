@@ -1,5 +1,6 @@
 import asyncHandler from "../middleware/asyncHandler.js";
 import User from "../models/userModel.js";
+import Product from "../models/productModel.js";
 import generateToken from "../utils/generateToken.js";
 
 const registerUser = asyncHandler(async (req, res) => {
@@ -137,11 +138,12 @@ const deleteUser = asyncHandler(async (req, res) => {
 });
 
 const removeUserFavorites = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.params.id);
+  console.log("hit!!");
+  const user = await User.findById(req.body.userId);
   if (user) {
-    let index = user.favorites.indexOf(req.body.favorites);
+    let index = user.favorites.indexOf(req.body.favoriteId);
     if (index !== -1) {
-      console.log(user.favorites[index]) 
+      console.log(user.favorites[index]);
       user.favorites.splice(index, 1);
       const updatedUser = await user.save();
       res.json({
@@ -156,11 +158,24 @@ const removeUserFavorites = asyncHandler(async (req, res) => {
   }
 });
 
-const updateUserFavorites = asyncHandler(async (req, res) => {
+const getUserFavorites = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
+  const products = await Product.find({ _id: { $in: user.favorites } });
+  if (!products) {
+    return res.status(404).json({ message: "Products not found." });
+  }
+  return res.json(products);
+});
+
+const updateUserFavorites = asyncHandler(async (req, res) => {
+  console.log("hiiiiiit");
+  const user = await User.findById(req.params.id);
+  console.log(user);
   if (user) {
-    user.favorites = req.body.favorites;
+    user.favorites = req.body.favoriteItems;
+    console.log(user.favorites)
     const updatedUser = await user.save();
+    console.log(updatedUser.favorites);
     res.json({
       _id: updatedUser._id,
       favorites: updatedUser.favorites,
@@ -182,5 +197,6 @@ export {
   updateUser,
   deleteUser,
   removeUserFavorites,
+  getUserFavorites,
   updateUserFavorites,
 };

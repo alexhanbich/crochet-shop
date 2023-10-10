@@ -15,8 +15,7 @@ const ProductDetails = () => {
 
   const { userInfo } = useSelector((state) => state.auth);
 
-  const cart = useSelector((state) => state.cart);
-  let favoriteItems = cart.favoriteItems;
+  const { favoriteItems } = useSelector((state) => state.cart);
 
   const [updateFavorites, { isLoading: loadingUpdateFavorites }] =
     useUpdateFavoritesMutation();
@@ -27,12 +26,11 @@ const ProductDetails = () => {
 
   const addToFavoritesHandler = async () => {
     dispatch(addToFavorites({ ...product }));
-    
     if (userInfo) {
       try {
         await updateFavorites({
           userId: userInfo._id,
-          favorites: favoriteItems,
+          favoriteItems: favoriteItems,
         });
       } catch (err) {
         toast.error(err?.data?.message || err.error);
@@ -79,13 +77,13 @@ const ProductDetails = () => {
                 <button
                   onClick={addToCartHandler}
                   disabled={product.numStock < 1}
-                  className="w-1/3 bg-gray-900 text-white border rounded-2xl p-2 hover:bg-gray-700 disabled:bg-gray-500"
+                  className="w-1/3 bg-black text-white border rounded-2xl p-2 hover:bg-gray"
                 >
                   Add To Bag
                 </button>
                 <p className="mx-6"> or </p>
                 <button
-                  className="w-1/3 bg-white text-black border rounded-2xl p-2 hover:bg-gray-200"
+                  className="w-1/3 bg-white text-black border rounded-2xl p-2 hover:bg-lightgray"
                   onClick={addToFavoritesHandler}
                 >
                   Favorite
