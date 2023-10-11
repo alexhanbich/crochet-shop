@@ -29,7 +29,7 @@ const AdminProductItem = ({ product, refetch }) => {
     <tr className="border">
       <td className="pl-1">{product?._id}</td>
       <td>{product?.name}</td>
-      <td>${product?.price.toFixed(2)}</td>
+      <td className="font-body2 font-medium">${product?.price.toFixed(2)}</td>
       <td>
         <LiaEdit
           className="text-black text-xl hover:cursor-pointer"

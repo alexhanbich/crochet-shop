@@ -5,11 +5,13 @@ import {
 } from "../slices/ordersApiSlice";
 import CartItem from "../components/CartItem";
 import { date } from "../utils/utils";
+import { useSelector } from "react-redux";
 
 import React from "react";
 
 const OrderDetails = () => {
   const { id: orderId } = useParams();
+  const { userInfo } = useSelector((state) => state.auth);
   const {
     data: order,
     refetch,
@@ -34,13 +36,17 @@ const OrderDetails = () => {
         <h1 className="text-3xl font-bold text-black mb-8">
           Order #{order._id}
         </h1>
-        <button
-          className="bg-black px-2 text-white border rounded-xl mb-8 disabled:bg-gray-500 hover:bg-gray-500"
-          onClick={deliverHandler}
-          disabled={order.isDelivered}
-        >
-          Mark as Delivered
-        </button>
+        {userInfo.isAdmin ? (
+          <button
+            className="bg-black px-2 text-white border rounded-xl mb-8 disabled:bg-gray hover:bg-gray"
+            onClick={deliverHandler}
+            disabled={order.isDelivered}
+          >
+            Mark as Delivered
+          </button>
+        ) : (
+          <div></div>
+        )}
       </div>
 
       <div className="flex mb-8 space-x-12">
@@ -48,15 +54,12 @@ const OrderDetails = () => {
         {order.isDelivered ? (
           <button
             disabled
-            className="bg-white px-2 text-green-500 border rounded-xl"
+            className="bg-white px-2 text-green border rounded-xl"
           >
             Delivered
           </button>
         ) : (
-          <button
-            disabled
-            className="bg-white px-2 text-red border rounded-xl"
-          >
+          <button disabled className="bg-white px-2 text-red border rounded-xl">
             Not Delivered
           </button>
         )}
@@ -65,7 +68,7 @@ const OrderDetails = () => {
       <div className="text-2xl pb-4">Your Items</div>
       <div className="flex justify-between">
         <div className="w-3/5 space-y-4 gap-x-8">
-          <hr className="text-lightgray"  />
+          <hr className="text-lightgray" />
           {orderItems.map((product) => {
             return (
               <CartItem key={product._id} product={product} canEdit={false} />
@@ -101,7 +104,7 @@ const OrderDetails = () => {
               <dl className="space-y-3 text-md text-black">
                 <div className="text-xl pb-2">Payment Summary</div>
                 <div className="flex justify-between">
-                  <dt className="text-gray-500">
+                  <dt className="text-gray">
                     Subtotal (
                     {orderItems.reduce((acc, item) => acc + item.cnt, 0)})
                   </dt>
@@ -112,21 +115,21 @@ const OrderDetails = () => {
                       .toFixed(2)}
                   </dd>
                 </div>
-                <hr className="text-lightgray"  />
+                <hr className="text-lightgray" />
                 <div className="flex justify-between">
-                  <dt className="text-gray-500">Shipping</dt>
-                  <dd className="text-sm text-gray-500">
+                  <dt className="text-gray">Shipping</dt>
+                  <dd className="text-sm text-gray">
                     ${order.shippingPrice.toFixed(2)}
                   </dd>
                 </div>
-                <hr className="text-lightgray"  />
+                <hr className="text-lightgray" />
                 <div className="flex justify-between">
-                  <dt className="text-gray-500">Tax</dt>
-                  <dd className="text-sm text-gray-500">
+                  <dt className="text-gray">Tax</dt>
+                  <dd className="text-sm text-gray">
                     ${order.taxPrice.toFixed(2)}
                   </dd>
                 </div>
-                <hr className="text-lightgray"  />
+                <hr className="text-lightgray" />
                 <div className="flex justify-between text-black text-lg">
                   <dt className="">Total</dt>
                   <dd>${order.totalPrice.toFixed(2)}</dd>

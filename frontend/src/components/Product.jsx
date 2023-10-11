@@ -21,12 +21,16 @@ const Product = ({ product }) => {
   };
 
   const addToFavoritesHandler = async () => {
-    dispatch(addToFavorites({ ...product }));
+    dispatch(addToFavorites({ ...product }))
     if (userInfo) {
       try {
+        let newFavoriteItems = [...favoriteItems];
+        if (!favoriteItems.includes(product)) {
+          newFavoriteItems = [...favoriteItems, product];
+        }
         await updateFavorites({
           userId: userInfo._id,
-          favoriteItems: favoriteItems,
+          favoriteItems: newFavoriteItems,
         });
       } catch (err) {
         toast.error(err?.data?.message || err.error);
@@ -63,12 +67,12 @@ const Product = ({ product }) => {
         <div className="mx-5">
           <Link to={`/product/${product._id}`}>
             <div className="flex justify-between space-y-1">
-              <h5 className="w-3/4 truncate text-gray-700 mt-1">
+              <h5 className="w-3/4 truncate text-gray mt-1">
                 {product.name}
               </h5>
               <Rating value={product.rating} />
             </div>
-            <h5 className="text-center font-bold text-gray-900 mb-2">
+            <h5 className="text-center font-body2 font-medium mb-2">
               ${product.price.toFixed(2)}
             </h5>
           </Link>

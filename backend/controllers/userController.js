@@ -140,9 +140,12 @@ const deleteUser = asyncHandler(async (req, res) => {
 const removeUserFavorites = asyncHandler(async (req, res) => {
   const user = await User.findById(req.body.userId);
   if (user) {
-    let index = user.favorites.indexOf(req.body.favoriteId);
-    if (index !== -1) {
-      console.log(user.favorites[index]);
+    let product = user.favorites.find((i) => i._id === req.body.favoriteId);
+    if (product) {
+      var index = user.favorites.indexOf(product);
+        if (index !== -1) {
+          user.favorites.splice(index, 1);
+        }
       user.favorites.splice(index, 1);
       const updatedUser = await user.save();
       res.json({

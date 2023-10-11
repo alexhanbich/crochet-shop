@@ -16,7 +16,7 @@ const AdminOrderItem = (props) => {
       <td className="px-2">{order.user.name}</td>
       <td className="px-2 whitespace-nowrap">{date(order.createdAt)}</td>
       {order.isDelivered ? (
-        <td className="px-2 text-green-500">Delivered</td>
+        <td className="px-2 text-green">Delivered</td>
       ) : (
         <td className="px-2 text-red">In Progress</td>
       )}

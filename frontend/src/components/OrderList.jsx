@@ -8,7 +8,7 @@ const OrderList = () => {
     <p>loading</p>
   ) : (
     <div className="space-y-4 w-full pt-12 pl-16">
-      <h1 className="text-xl font-bold text-gray-900">
+      <h1 className="text-xl font-bold">
         Past Orders
       </h1>
       {orders?.map((order) => {

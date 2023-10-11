@@ -1,13 +1,14 @@
-import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, removeFromFavorites} from "../slices/cartSlice";
+import { addToCart, removeFromFavorites } from "../slices/cartSlice";
 import { LiaTrashAlt, LiaShoppingBagSolid } from "react-icons/lia";
 import { useRemoveFavoritesMutation } from "../slices/usersApiSlice";
 import { toast } from "react-toastify";
 import Rating from "./Rating";
 
 const FavoriteItem = ({ product, refetch }) => {
+  const [cnt, setCnt] = useState(1);
   const dispatch = useDispatch();
   const addToCartHandler = async (item, cnt) => {
     dispatch(addToCart({ ...item, cnt }));
@@ -19,17 +20,14 @@ const FavoriteItem = ({ product, refetch }) => {
     useRemoveFavoritesMutation();
 
   const removeFromFavoritesHandler = async (productId) => {
-    dispatch(removeFromFavorites({ ...product }))
+    dispatch(removeFromFavorites({ ...product }));
     try {
       const res = await removeFavorites({
         userId: userInfo._id,
         favoriteId: productId,
       }).unwrap();
       if (res.didUpdate) {
-        toast.success("Removed from favorites.");
         refetch();
-      } else {
-        toast.warning("Already removed from favorites.");
       }
     } catch (err) {
       toast.error(err?.data?.message || err.error);
@@ -37,7 +35,7 @@ const FavoriteItem = ({ product, refetch }) => {
   };
   return (
     <div className="mx-auto">
-      <div className="grid grid-cols-5 items-center justify-center gap-8">
+      <div className="grid grid-cols-6 items-center justify-center gap-8">
         <img
           src={product.image}
           alt="image"
@@ -45,19 +43,30 @@ const FavoriteItem = ({ product, refetch }) => {
         />
         <div>
           <Link to={`/product/${product._id}`}>
-            <h3 className="text-lg text-gray-700 hover:cursor-pointer hover:underline">
+            <h3 className="text-lg hover:cursor-pointer hover:underline">
               {product.name}
             </h3>
           </Link>
         </div>
-        <h5 className="text-lg text-center font-bold text-gray-900">
+        <h5 className="text-lg text-center font-body2 font-medium">
           ${product.price.toFixed(2)}
         </h5>
         <Rating value={product.rating} />
+        {product.numStock > 0 && (
+          <select
+            value={cnt}
+            onChange={(i) => setCnt(Number(i.target.value))}
+            className="py-2 px-2 border w-fit h-fit focus:outline-none"
+          >
+            {[...Array(product.numStock).slice(0, 9)].map((_, i) => {
+              return <option key={i + 1}>{i + 1}</option>;
+            })}
+          </select>
+        )}
         <div className="flex flex-1 items-center justify-end gap-6">
           <LiaShoppingBagSolid
-            className="text-xl text-black hover:text-gray-500 hover:cursor-pointer"
-            onClick={() => addToCartHandler(product, Number(1))}
+            className="text-xl hover:text-gray hover:cursor-pointer"
+            onClick={() => addToCartHandler(product, cnt)}
           />
           <LiaTrashAlt
             className="text-xl text-red hover:text-red hover:cursor-pointer"

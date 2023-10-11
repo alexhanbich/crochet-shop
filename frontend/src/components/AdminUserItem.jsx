@@ -34,7 +34,7 @@ const AdminUserItem = ({ user, refetch }) => {
       <td>{user?.email}</td>
       {user?.isAdmin ? (
         <td>
-          <LiaCheckSolid className="text-green-500" />
+          <LiaCheckSolid className="text-green" />
         </td>
       ) : (
         <td>

@@ -11,7 +11,7 @@ module.exports = {
         secondary: '#F9F3F2',
         black: '#272727',
         red: '#B34242',
-        green: '#3F5041',
+        green: '#5BC149',
         gray:'#5A5A5A',
         lightgray:'#D3D3D3',
       },
@@ -21,6 +21,7 @@ module.exports = {
       fontFamily: {
         'logo': ['Amita','sans-serif'],
         'body': ['Roboto Light','sans-serif'],
+        'body2': ['Roboto','sans-serif'],
       },
       gridTemplateColumns: {
         'fluid': 'repeat(auto-fit, minmax(12rem, 1fr))',

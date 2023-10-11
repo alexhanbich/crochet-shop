@@ -22,7 +22,10 @@ const CartItem = (props) => {
           className="h-32 w-32 rounded object-cover"
         />
         <div>
-          <h3 className="text-lg text-gray-700">{product.name}</h3>
+          <h3 className="text-lg">{product.name}</h3>
+        </div>
+        <div>
+        <h3 className="text-lg font-body2 font-medium">${product.price.toFixed(2)}</h3>
         </div>
         <div className="flex flex-1 items-center justify-end gap-2">
           <select
@@ -40,7 +43,7 @@ const CartItem = (props) => {
             })}
           </select>
 
-          <button className="text-xl text-gray-600 transition hover:text-red">
+          <button className="text-xl text-gray transition hover:text-red">
             <LiaTrashAlt onClick={() => removeFromCartHandler(product._id)} />
           </button>
         </div>

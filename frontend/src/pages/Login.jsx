@@ -43,7 +43,7 @@ const Login = () => {
     <div className="flex flex-col items-center px-6 py-8 mx-auto mt-24 text-black">
       <div className="w-[480px] bg-secondary rounded-lg shadow">
         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-          <h1 className="text-xl font-bold text-gray-900">
+          <h1 className="text-xl font-bold">
             Sign In
           </h1>
           <form className="space-y-4" noValidate onSubmit={submitHandler}>
@@ -74,11 +74,11 @@ const Login = () => {
                     id="remember"
                     aria-describedby="remember"
                     type="checkbox"
-                    className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-2"
+                    className="w-4 h-4 border border-lightgray rounded focus:ring-2"
                   />
                 </div>
                 <div className="ml-3 text-sm">
-                  <label className="text-gray-500">Remember me</label>
+                  <label className="text-gray">Remember me</label>
                 </div>
               </div>
               <a href="#" className="text-sm hover:underline">

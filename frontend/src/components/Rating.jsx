@@ -4,7 +4,7 @@ const Rating = ({ value }) => {
   return (
     <div className='flex items-center justify-center'>
         <FaStar className='text-yellow-400 pr-1' />
-        <p className='text-sm text-gray-400'>{value}</p>
+        <p className='text-sm text-lightgray'>{value}</p>
     </div>
   )
 };

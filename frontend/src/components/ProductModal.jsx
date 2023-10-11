@@ -176,7 +176,7 @@ const ProductModal = ({
         <button
           onClick={submitHandler}
           disabled={!isFormValid()}
-          className="w-full rounded-full bg-black mt-5 p-3 text-sm text-white transition hover:bg-gray-600 disabled:bg-gray-400"
+          className="w-full rounded-full bg-black mt-5 p-3 text-sm text-white transition hover:bg-gray disabled:bg-gray"
         >
           Save Product
         </button>

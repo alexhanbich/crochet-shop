@@ -55,12 +55,12 @@ const ProductDetails = () => {
             <div className="w-1/2 p-8 pl-0">
               <h1 className="text-2xl pb-4">{product.name}</h1>
               {product.numStock > 0 ? (
-                <p className="pb-4 text-gray-500">In Stock</p>
+                <p className="pb-4 text-gray">In Stock</p>
               ) : (
-                <p className="pb-4 text-gray-500">Out of Stock</p>
+                <p className="pb-4 text-gray">Out of Stock</p>
               )}
               <div className="flex text-lg items-center pb-4">
-                <h5 className="font-bold text-gray-900 mr-4">
+                <h5 className="font-body2 font-medium mr-4">
                   ${product.price.toFixed(2)}
                 </h5>
                 <Rating value={product.rating} />
@@ -77,7 +77,7 @@ const ProductDetails = () => {
                   })}
                 </select>
               )}
-              <div className="flex text-gray-500 items-center mt-4">
+              <div className="flex text-gray items-center mt-4">
                 <button
                   onClick={addToCartHandler}
                   disabled={product.numStock < 1}

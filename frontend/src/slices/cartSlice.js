@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 const cartItems = localStorage.getItem("cart");
 const initialState = cartItems
   ? JSON.parse(cartItems)
-  : { cartItems: [], favoriteItems: [], shippingAddress: {}, paymentMethod: "PayPal" };
+  : { cartItems: [], favoriteItems: [], shippingAddress: {} };
 
 const cartSlice = createSlice({
   name: "cart",
@@ -38,26 +38,28 @@ const cartSlice = createSlice({
       const item = action.payload;
       const duplicateItem = state.favoriteItems.find((i) => i._id === item._id);
       if (duplicateItem) {
-          toast.warning("Item already in favorites.");
+        toast.warning("Item already in favorites.");
       } else {
         state.favoriteItems = [...state.favoriteItems, item];
-        localStorage.setItem('cart', JSON.stringify(state));
+        localStorage.setItem("cart", JSON.stringify(state));
         toast.success("Item added to favorites.");
       }
     },
     updateLocalFavorites: (state, action) => {
       state.favoriteItems = [...action.payload];
-      localStorage.setItem('cart', JSON.stringify(state));
+      localStorage.setItem("cart", JSON.stringify(state));
     },
     removeFromFavorites: (state, action) => {
       const item = action.payload;
-      state.favoriteItems = state.favoriteItems.filter((i) => i._id !== item._id);
-      localStorage.setItem('cart', JSON.stringify(state));
+      state.favoriteItems = state.favoriteItems.filter(
+        (i) => i._id !== item._id
+      );
+      localStorage.setItem("cart", JSON.stringify(state));
       toast.success("Item removed from favorites.");
     },
     saveShippingAddress: (state, action) => {
       state.shippingAddress = action.payload;
-      localStorage.setItem('cart', JSON.stringify(state));
+      localStorage.setItem("cart", JSON.stringify(state));
     },
     savePaymentMethod: (state, action) => {
       state.paymentMethod = action.payload;
@@ -65,11 +67,22 @@ const cartSlice = createSlice({
     },
     clearCartItems: (state, action) => {
       state.cartItems = [];
-      localStorage.setItem('cart', JSON.stringify(state));
+      localStorage.setItem("cart", JSON.stringify(state));
     },
-    resetCart: (state) => (state = initialState),
+    resetCart: (state) =>
+      (state = { cartItems: [], favoriteItems: [], shippingAddress: {} }),
   },
 });
 
-export const { addToCart, removeFromCart, addToFavorites, updateLocalFavorites, removeFromFavorites, saveShippingAddress, savePaymentMethod, clearCartItems, resetCart } = cartSlice.actions;
+export const {
+  addToCart,
+  removeFromCart,
+  addToFavorites,
+  updateLocalFavorites,
+  removeFromFavorites,
+  saveShippingAddress,
+  savePaymentMethod,
+  clearCartItems,
+  resetCart,
+} = cartSlice.actions;
 export default cartSlice.reducer;

@@ -19,9 +19,9 @@ const OrderItem = (props) => {
         <div className="flex space-x-8">
           <div className="flex flex-col space-y-1">
             <h1>Order #{order._id}</h1>
-            <div className="text-gray-500">{ date(order.createdAt) }</div>
+            <div className="text-gray">{ date(order.createdAt) }</div>
             <a
-              className="text-green-700 hover:cursor-pointer"
+              className="text-green hover:cursor-pointer"
               onClick={viewOrderHandler}
             >
               View Order {"->"}
@@ -30,12 +30,12 @@ const OrderItem = (props) => {
           {order.isDelivered ? (
             <div className="flex items-center space-x-2">
               <span className="h-2 w-2 rounded-full bg-green inline-block"></span>
-              <div className="text-gray-500">Delivered</div>
+              <div className="text-gray">Delivered</div>
             </div>
           ) : (
             <div className="flex items-center space-x-2">
-              <span className="h-2 w-2 rounded-full bg-gray-400 inline-block"></span>
-              <div className="text-gray-500">In Progress</div>
+              <span className="h-2 w-2 rounded-full bg-gray inline-block"></span>
+              <div className="text-gray">In Progress</div>
             </div>
           )}
           

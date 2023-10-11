@@ -19,10 +19,10 @@ const AdminProductList = () => {
     <p>loading</p>
   ) : (
     <div className="space-y-4 w-full pt-12 pl-16">
-      <h1 className="text-xl font-bold text-gray-900">All Products</h1>
+      <h1 className="text-xl font-bold ">All Products</h1>
       <div className="flex justify-end">
         <LiaPlusCircleSolid
-          className="text-2xl hover:cursor-pointer hover:text-gray-500"
+          className="text-2xl hover:cursor-pointer hover:text-lightgray"
           onClick={createProductHandler}
         />
       </div>

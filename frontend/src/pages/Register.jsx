@@ -48,7 +48,7 @@ const Register = () => {
     <div className="flex flex-col items-center px-6 py-8 mx-auto mt-6 text-black">
       <div className="w-[480px] bg-secondary rounded-lg shadow">
         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-          <h1 className="text-xl font-bold text-gray-900">
+          <h1 className="text-xl font-bold">
             Create your account
           </h1>
           <form className="space-y-4" noValidate onSubmit={submitHandler}>
