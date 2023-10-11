@@ -69,7 +69,7 @@ const FavoriteItem = ({ product, refetch }) => {
             onClick={() => addToCartHandler(product, cnt)}
           />
           <LiaTrashAlt
-            className="text-xl text-red hover:text-red hover:cursor-pointer"
+            className="text-xl text-red hover:cursor-pointer"
             onClick={() => removeFromFavoritesHandler(product._id)}
           />
         </div>

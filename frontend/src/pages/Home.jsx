@@ -34,7 +34,7 @@ const Home = () => {
               <img className="h-48 -mt-4" src="/images/yarn.png" />
             </div>
           </div>
-          <div className="text-3xl py-4 px-8"> Featured Products</div>
+          <div className="text-3xl py-8 px-4"> Featured Products</div>
           <div className="bg-white grid grid-cols-fluid gap-8">
             {featuredProducts.map((product) => (
               <Product key={product._id} product={product} />

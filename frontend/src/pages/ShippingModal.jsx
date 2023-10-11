@@ -7,7 +7,6 @@ import { GrFormClose } from "react-icons/gr";
 const ShippingModal = ({ openModal, closeModal }) => {
   const cart = useSelector((state) => state.cart);
   const shippingAddress = cart.shippingAddress;
-  console.log(shippingAddress)
 
   const [firstName, setFirstName] = useState(shippingAddress.firstName || "");
   const [lastName, setLastName] = useState(shippingAddress.lastName || "");

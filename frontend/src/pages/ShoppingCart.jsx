@@ -130,13 +130,11 @@ const ShoppingCart = () => {
                   </div>
                   {cartItems.map((item) => {
                     return (
-                    <div className="flex justify-between text-sm pt-1">
+                      <div className="flex justify-between text-sm pt-1">
                         <dt className="text-gray">
                           - {item.name} ({item.cnt})
                         </dt>
-                        <dd>
-                          ${(item.price * item.cnt).toFixed(2)}
-                        </dd>
+                        <dd>${(item.price * item.cnt).toFixed(2)}</dd>
                       </div>
                     );
                   })}
@@ -144,7 +142,7 @@ const ShoppingCart = () => {
                 <hr className="text-lightgray" />
                 <div className="flex justify-between">
                   <dt className="text-gray">Shipping</dt>
-                  {!hasShipping() ? (
+                  {!hasShipping() || cartItems.length == 0 ? (
                     <dd className="text-sm text-gray">-</dd>
                   ) : (
                     <dd className="text-sm text-gray">${cart.shippingPrice}</dd>
@@ -153,7 +151,7 @@ const ShoppingCart = () => {
                 <hr className="text-lightgray" />
                 <div className="flex justify-between">
                   <dt className="text-gray">Tax</dt>
-                  {!hasShipping() ? (
+                  {!hasShipping() || cartItems.length == 0 ? (
                     <dd className="text-sm text-gray">-</dd>
                   ) : (
                     <dd className="text-sm text-gray">${cart.taxPrice}</dd>
@@ -162,7 +160,7 @@ const ShoppingCart = () => {
                 <hr className="text-lightgray" />
                 <div className="flex justify-between text-black text-lg">
                   <dt>Total</dt>
-                  {!hasShipping() ? (
+                  {!hasShipping() || cartItems.length == 0 ? (
                     <dd>-</dd>
                   ) : (
                     <dd className="font-body2 font-medium ">

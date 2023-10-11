@@ -40,7 +40,7 @@ const Product = ({ product }) => {
   return (
     <div>
       <div className="flex flex-col border border-lightgray w-56 mx-auto group overflow-hidden">
-        <div className="relative flex h-56 w-56">
+        <div className="relative flex h-44 w-56">
           <Link to={`/product/${product._id}`}>
             <img
               className="absolute top-0 right-0 h-full w-full object-cover"

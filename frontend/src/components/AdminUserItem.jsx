@@ -58,7 +58,7 @@ const AdminUserItem = ({ user, refetch }) => {
       </td>
       <td>
         <LiaTrashAlt
-          className="hover:text-red text-xl hover:cursor-pointer"
+          className="text-red text-xl hover:cursor-pointer"
           onClick={() => deleteUserHandler(user._id)}
         />
       </td>

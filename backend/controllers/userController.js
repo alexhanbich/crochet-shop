@@ -177,7 +177,6 @@ const updateUserFavorites = asyncHandler(async (req, res) => {
   if (user) {
     user.favorites = [...req.body.favoriteItems];
     const updatedUser = await user.save();
-    console.log(updatedUser.favorites);
     res.json({
       _id: updatedUser._id,
       favorites: updatedUser.favorites,
