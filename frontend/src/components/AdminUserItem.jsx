@@ -43,7 +43,7 @@ const AdminUserItem = ({ user, refetch }) => {
       )}
       <td>
         <LiaEdit
-          className="text-black text-xl hover:cursor-pointer"
+          className="hover:text-gray text-xl hover:cursor-pointer"
           onClick={editUserHandler}
         />
         <div className="m-auto">
@@ -58,7 +58,7 @@ const AdminUserItem = ({ user, refetch }) => {
       </td>
       <td>
         <LiaTrashAlt
-          className="text-red-500 text-xl hover:cursor-pointer"
+          className="hover:text-red text-xl hover:cursor-pointer"
           onClick={() => deleteUserHandler(user._id)}
         />
       </td>

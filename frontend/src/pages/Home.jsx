@@ -15,7 +15,7 @@ const Home = () => {
           <div className="flex w-full text-2xl py-8 full-bleed-accent bg-primary">
             <div className="w-1/2 h-48 flex">
               <div className="flex flex-col">
-                <h1 className="ml-24">HANDMADE CROCHET</h1>
+                <h1 className="ml-24">Handmade Crochet</h1>
                 <p className="ml-24 py-4 text-sm">
                   Welcome to Hangy Shop, your destination for beautifully
                   crafted crochet creations. Explore our unique, handmade items

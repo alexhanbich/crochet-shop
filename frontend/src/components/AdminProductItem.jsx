@@ -32,7 +32,7 @@ const AdminProductItem = ({ product, refetch }) => {
       <td className="font-body2 font-medium">${product?.price.toFixed(2)}</td>
       <td>
         <LiaEdit
-          className="text-black text-xl hover:cursor-pointer"
+          className="hover:text-gray text-xl hover:cursor-pointer"
           onClick={editProductHandler}
         />
         <div className="m-auto">
@@ -47,7 +47,7 @@ const AdminProductItem = ({ product, refetch }) => {
       </td>
       <td>
         <LiaTrashAlt
-          className="text-red text-xl hover:cursor-pointer"
+          className="hover:text-red text-xl hover:cursor-pointer"
           onClick={() => deleteProductHandler(product._id)}
         />
       </td>
