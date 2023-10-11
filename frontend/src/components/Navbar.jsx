@@ -13,12 +13,16 @@ import { updateLocalFavorites } from "../slices/cartSlice";
 const Navbar = () => {
   const { cartItems, favoriteItems } = useSelector((state) => state.cart);
   const { userInfo } = useSelector((state) => state.auth);
-  const { data: favoriteProducts, isLoading, error } = useGetFavoritesQuery(userInfo?._id || 'loading');
+  const {
+    data: favoriteProducts,
+    isLoading,
+    error,
+  } = useGetFavoritesQuery(userInfo?._id || "loading");
 
   const dispatch = useDispatch();
   useEffect(() => {
     if (userInfo && favoriteProducts) {
-      dispatch(updateLocalFavorites([...favoriteProducts]))
+      dispatch(updateLocalFavorites([...favoriteProducts]));
     }
   }, [userInfo, favoriteProducts, isLoading]);
 
@@ -37,20 +41,17 @@ const Navbar = () => {
         <div className="group">
           <Link to="/favorites">
             <LiaHeart className="mr-4 text-red" />
+            {favoriteItems.length > 0 && (
+              <div className="absolute -mt-6 ml-3 w-3 h-3 rounded-full bg-red flex justify-center items-center">
+                <p className="text-xxs text-white">{favoriteItems.length}</p>
+              </div>
+            )}
+            <hr className="border-transparent mt-1 mr-4 w-5 group-hover:border-black" />
           </Link>
-          {favoriteItems.length > 0 && (
-            <div className="absolute -mt-6 ml-3 w-3 h-3 rounded-full bg-red flex justify-center items-center">
-              <p className="text-xxs text-white">
-                {favoriteItems.length}
-              </p>
-            </div>
-          )}
-          <hr className="border-transparent mt-1 mr-4 w-5 group-hover:border-black" />
         </div>
         <div className="group relative">
           <Link to="/cart">
             <LiaShoppingBagSolid className="mr-4" />
-          </Link>
           {cartItems.length > 0 && (
             <div className="absolute -mt-6 ml-3 w-3 h-3 rounded-full bg-red flex justify-center items-center">
               <p className="text-xxs text-white">
@@ -59,6 +60,7 @@ const Navbar = () => {
             </div>
           )}
           <hr className="border-transparent mt-1 mr-4 w-5 group-hover:border-black" />
+          </Link>
         </div>
         {userInfo ? (
           userInfo.isAdmin ? (

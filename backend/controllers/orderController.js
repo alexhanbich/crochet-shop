@@ -52,7 +52,7 @@ const createOrder = asyncHandler(async (req, res) => {
 });
 
 const getOrders = asyncHandler(async (req, res) => {
-  const orders = await Order.find({ user: req.user._id });
+  const orders = await Order.find({ user: req.user._id }).sort({ createdAt: 'desc' });
   res.json(orders);
 });
 
@@ -87,7 +87,7 @@ const updateOrderToDelivered = asyncHandler(async (req, res) => {
 });
 
 const getAllUserOrders = asyncHandler(async (req, res) => {
-  const orders = await Order.find({}).populate('user', 'id name');
+  const orders = await Order.find({}).populate('user', 'id name').sort({ isDelivered: 'asc' }).sort({ createdAt: 'desc' });
   res.json(orders);
 });
 
