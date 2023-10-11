@@ -1,5 +1,6 @@
 import Product from "../components/Product";
 import { useGetProductsQuery } from "../slices/productsApiSlice.js";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const { data: products, isLoading, error } = useGetProductsQuery();
@@ -22,7 +23,11 @@ const Home = () => {
                   with love in every stitch. Shop with us and experience the
                   artistry of crochet today!
                 </p>
-                <button className="ml-24 text-sm w-32 bg-black text-white p-2 mt-2 rounded">View Products {"->"}</button>
+                <Link to="/products">
+                  <button className="ml-24 text-sm w-32 bg-black text-white p-2 mt-2 rounded">
+                    View Products {"->"}
+                  </button>
+                </Link>
               </div>
             </div>
             <div className="flex justify-center w-1/2">

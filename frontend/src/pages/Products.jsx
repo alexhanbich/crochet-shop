@@ -1,21 +1,8 @@
-import { useSelector } from "react-redux";
-import FavoriteItem from "../components/FavoriteItem";
-import { useGetFavoriteProductsQuery } from "../slices/productsApiSlice";
+import { useGetProductsQuery } from "../slices/productsApiSlice.js";
+import Product from "../components/Product";
 
-const Favorites = () => {
-  const cart = useSelector((state) => state.cart);
-  let favoriteItems = cart.favoriteItems;
-
-  const { userInfo } = useSelector((state) => state.auth);
-  const {
-    data: products,
-    isLoading,
-    error,
-  } = useGetFavoriteProductsQuery(userInfo?._id);
-
-  if (products) {
-    favoriteItems = products;
-  }
+const Products = () => {
+  const { data: products, isLoading, error } = useGetProductsQuery();
 
   return (
     <div>
@@ -23,14 +10,16 @@ const Favorites = () => {
         <div>loading</div>
       ) : (
         <div className="mx-auto px-4 py-8">
-          <h1 className="text-3xl font-bold text-black">All Products</h1>
-          {favoriteItems.map((product) => (
-            <FavoriteItem key={product._id} product={product} />
-          ))}
+          <h1 className="text-3xl font-bold text-black pb-8">All Products</h1>
+          <div className="bg-white grid grid-cols-fluid gap-8">
+            {products.map((product) => (
+              <Product key={product._id} product={product} />
+            ))}
+          </div>
         </div>
       )}
     </div>
   );
 };
 
-export default Favorites;
+export default Products;

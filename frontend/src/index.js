@@ -21,12 +21,14 @@ import OrderDetails from './pages/OrderDetails';
 import Profile from './pages/Profile';
 import AdminProfile from './pages/AdminProfile';
 import Favorites from './pages/Favorites';
+import Products from './pages/Products';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={ <App />}>
       <Route index={ true } path='/' element={ <Home />} />
       <Route path='/product/:id' element={<ProductDetails />} />
+      <Route path='/products' element={<Products />} />
       <Route path='/cart' element={<ShoppingCart />} />
       <Route path='/favorites' element={<Favorites />} />
       <Route path='/login' element={<Login />} />
