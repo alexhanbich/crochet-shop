@@ -1,10 +1,11 @@
 import Product from "../components/Product";
 import { useGetProductsQuery } from "../slices/productsApiSlice.js";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const Home = () => {
-  const { data: products, isLoading, error } = useGetProductsQuery();
-  const featuredProducts = products?.slice(0, 4);
+  const { pageNumber } = useParams();
+  const { data, isLoading, error } = useGetProductsQuery({ pageNumber });
+  const featuredProducts = data?.products?.slice(0, 4);
   return (
     <>
       {isLoading ? (
@@ -35,7 +36,7 @@ const Home = () => {
             </div>
           </div>
           <div className="text-3xl py-8 px-4"> Featured Products</div>
-          <div className="bg-white grid grid-cols-fluid gap-8">
+          <div className="bg-white grid grid-cols-4">
             {featuredProducts.map((product) => (
               <Product key={product._id} product={product} />
             ))}

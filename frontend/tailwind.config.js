@@ -23,9 +23,6 @@ module.exports = {
         'body': ['Roboto Light','sans-serif'],
         'body2': ['Roboto','sans-serif'],
       },
-      gridTemplateColumns: {
-        'fluid': 'repeat(auto-fit, minmax(12rem, 1fr))',
-      }
     },
   },
   plugins: [],

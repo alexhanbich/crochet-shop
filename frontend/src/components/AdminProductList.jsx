@@ -7,7 +7,8 @@ import { LiaPlusCircleSolid } from "react-icons/lia";
 import ProductModal from "./ProductModal";
 
 const AdminProductList = () => {
-  const { data: products, isLoading, error, refetch } = useGetProductsQuery();
+  const pageNumber = -1
+  const { data, isLoading, error, refetch } = useGetProductsQuery({ pageNumber });
 
   const [openModal, setOpenModal] = useState(false);
 
@@ -44,7 +45,7 @@ const AdminProductList = () => {
           </tr>
         </thead>
         <tbody className="border">
-          {products?.map((product) => {
+          {data.products.map((product) => {
             return (
               <AdminProductItem
                 key={product._id}

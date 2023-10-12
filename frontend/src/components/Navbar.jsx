@@ -28,7 +28,7 @@ const Navbar = () => {
 
   return (
     <nav className="grid grid-cols-3 w-full text-xl pt-4 pb-4 full-bleed-accent bg-primary">
-      <Link to="/">
+      <Link to="/products">
         <div className="group">
           <LiaHomeSolid className="mt-4 ml-4" />
           <hr className="border-transparent mt-1 ml-4 w-5 group-hover:border-black" />

@@ -3,8 +3,19 @@ import Product from "../models/productModel.js";
 import User from "../models/userModel.js";
 
 const getProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find({});
-  res.json(products);
+  if (Number(req.query.pageNumber) == -1) {
+    const products = await Product.find({});
+    res.json({ products });
+  }
+  else {
+    const NUM_ITEMS = 8;
+    const page = Number(req.query.pageNumber) || 1;
+    const count = await Product.countDocuments({});
+    const products = await Product.find({})
+      .limit(NUM_ITEMS)
+      .skip(NUM_ITEMS * (page - 1));
+    res.json({ products, page, pages: Math.ceil(count / NUM_ITEMS) });
+  }
 });
 
 const getProductById = asyncHandler(async (req, res) => {
@@ -17,7 +28,7 @@ const getProductById = asyncHandler(async (req, res) => {
 
 const getFavoriteProducts = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
-  const products = await Product.find({ _id: { $in: user.favorites } })
+  const products = await Product.find({ _id: { $in: user.favorites } });
   if (!products) {
     return res.status(404).json({ message: "Products not found." });
   }
