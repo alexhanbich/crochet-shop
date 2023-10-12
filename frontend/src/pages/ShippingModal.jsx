@@ -124,7 +124,7 @@ const ShippingModal = ({ openModal, closeModal }) => {
   };
 
   return (
-    <dialog ref={ref} onCancel={closeModal} className="p-4">
+    <dialog ref={ref} onCancel={closeModal} className=" rounded rounded-lg p-4">
       <div className="flex justify-between">
         <h1 className="pb-4">Shipping Address</h1>
         <GrFormClose onClick={closeModal} />

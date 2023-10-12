@@ -49,7 +49,7 @@ const ReviewModal = ({ productId, openModal, closeModal }) => {
   };
 
   return (
-    <dialog ref={ref} onCancel={closeModal} className="p-4 w-[480px]">
+    <dialog ref={ref} onCancel={closeModal} className="p-4 rounded rounded-lg w-[480px]">
       <div className="text-2xl pt-4">Write a review</div>
       <hr className="text-lightgray" />
       <form className="space-y-4">

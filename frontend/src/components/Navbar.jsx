@@ -27,7 +27,7 @@ const Navbar = () => {
   }, [userInfo, favoriteProducts, isLoading]);
 
   return (
-    <nav className="grid grid-cols-3 w-full text-xl pt-4 pb-4 full-bleed-accent bg-primary">
+    <nav className="grid grid-cols-3 w-full text-xl pt-4 pb-4 full-bleed-secondary bg-secondary">
       <Link to="/products">
         <div className="group">
           <LiaHomeSolid className="mt-4 ml-4" />

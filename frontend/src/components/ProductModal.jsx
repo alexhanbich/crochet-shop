@@ -111,7 +111,7 @@ const ProductModal = ({
   };
 
   return (
-    <dialog ref={ref} onCancel={closeModal} className="p-4 w-[480px]">
+    <dialog ref={ref} onCancel={closeModal} className="rounded rounded-lg p-4 w-[480px]">
       <div className="flex justify-between">
         {isCreate ? (
           <h1 className="pb-4">Create Product</h1>

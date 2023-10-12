@@ -67,12 +67,10 @@ const Login = () => {
                 className="=border outline-blue-400 rounded-lg block w-full p-2.5"
               />
             </div>
-            <div className="flex items-center justify-between">
+            {/* <div className="flex items-center justify-between">
               <div className="flex items-start">
                 <div className="flex items-center h-5">
                   <input
-                    id="remember"
-                    aria-describedby="remember"
                     type="checkbox"
                     className="w-4 h-4 border border-lightgray rounded focus:ring-2"
                   />
@@ -84,7 +82,7 @@ const Login = () => {
               <a href="#" className="text-sm hover:underline">
                 Forgot password?
               </a>
-            </div>
+            </div> */}
             <button
               type="submit"
               disabled={isLoading}

@@ -19,19 +19,19 @@ const cartSlice = createSlice({
           i._id === duplicateItem._id ? item : i
         );
         if (duplicateItem.cnt === item.cnt) {
-          toast.warning("Item already in cart.");
+          toast.warning("Item already in bag.");
         } else {
-          toast.success("Item updated to cart.");
+          toast.success("Item updated to bag.");
         }
       } else {
         state.cartItems = [...state.cartItems, item];
-        toast.success("Item added to cart.");
+        toast.success("Item added to bag.");
       }
       return updateCart(state);
     },
     removeFromCart: (state, action) => {
       state.cartItems = state.cartItems.filter((i) => i._id !== action.payload);
-      toast.success("Item removed from cart.");
+      toast.success("Item removed from bag.");
       return updateCart(state);
     },
     addToFavorites: (state, action) => {

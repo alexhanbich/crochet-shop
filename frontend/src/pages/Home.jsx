@@ -14,7 +14,7 @@ const Home = () => {
         <p>{error?.data?.message || error.error}</p>
       ) : (
         <>
-          <div className="flex w-full text-2xl py-8 full-bleed-accent bg-primary">
+          <div className="flex w-full text-2xl py-8 full-bleed-secondary bg-secondary">
             <div className="w-1/2 h-48 flex">
               <div className="flex flex-col">
                 <h1 className="ml-24">Handmade Crochet</h1>
@@ -25,7 +25,7 @@ const Home = () => {
                   artistry of crochet today!
                 </p>
                 <Link to="/products">
-                  <button className="ml-24 text-sm w-32 bg-black text-white p-2 mt-2 rounded">
+                  <button className="ml-24 text-sm w-32 bg-primary p-2 mt-2 rounded">
                     View Products {"->"}
                   </button>
                 </Link>
