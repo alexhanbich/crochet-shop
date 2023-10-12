@@ -4,20 +4,37 @@ import { useState } from "react";
 import { saveShippingAddress } from "../slices/cartSlice";
 import { GrFormClose } from "react-icons/gr";
 
+import {
+  useGetAddressQuery,
+  useUpdateAddressMutation,
+} from "../slices/usersApiSlice";
+import { toast } from "react-toastify";
+
 const ShippingModal = ({ openModal, closeModal }) => {
   const cart = useSelector((state) => state.cart);
   const shippingAddress = cart.shippingAddress;
 
+  const { userInfo } = useSelector((state) => state.auth);
+  const userId = userInfo?._id;
+  const { data: userAddress, isLoading, error, refetch } = useGetAddressQuery(userId);
+  const [updateAddress, { isLoading: loadingUpdateAddress }] =
+    useUpdateAddressMutation();
+
   const [firstName, setFirstName] = useState(shippingAddress.firstName || "");
   const [lastName, setLastName] = useState(shippingAddress.lastName || "");
   const [address, setAddress] = useState(shippingAddress.address || "");
-  const [addressDetails, setAddressDetails] = useState(shippingAddress.addressDetails || "");
+  const [addressDetails, setAddressDetails] = useState(
+    shippingAddress.addressDetails || ""
+  );
   const [city, setCity] = useState(shippingAddress.city || "");
   const [state, setState] = useState(shippingAddress.state || "");
   const [country, setCountry] = useState(shippingAddress.country || "");
   const [zipCode, setZipCode] = useState(shippingAddress.zipCode || "");
   const [phone, setPhone] = useState(shippingAddress.phone || "");
 
+  const [isUseDefaultAddress, setIsUseDefaultAddress] = useState(false);
+  const [isSetDefaultAddress, setIsSetDefaultAddress] = useState(false);
+  
   const dispatch = useDispatch();
   const ref = useRef();
   useEffect(() => {
@@ -27,6 +44,31 @@ const ShippingModal = ({ openModal, closeModal }) => {
       ref.current?.close();
     }
   }, [openModal]);
+
+  const useDefaultAddressHandler = () => {
+    setIsUseDefaultAddress(!isUseDefaultAddress);
+    if (!userAddress || JSON.stringify(userAddress) === "{}") {
+      if (!isUseDefaultAddress) {
+        toast.warning("No default address.");
+      }
+    } else {
+      if (!isUseDefaultAddress) {
+        setFirstName(userAddress.firstName);
+        setLastName(userAddress.lastName);
+        setAddress(userAddress.address);
+        setAddressDetails(userAddress.addressDetails);
+        setCity(userAddress.city);
+        setState(userAddress.state);
+        setCountry(userAddress.country);
+        setZipCode(userAddress.zipCode);
+        setPhone(userAddress.phone);
+      }
+    }
+  };
+
+  const setDefaultAddressHandler = async () => {
+    setIsSetDefaultAddress(!isSetDefaultAddress);
+  };
 
   const isFormValid = () => {
     return (
@@ -41,7 +83,7 @@ const ShippingModal = ({ openModal, closeModal }) => {
     );
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     dispatch(
       saveShippingAddress({
@@ -56,6 +98,28 @@ const ShippingModal = ({ openModal, closeModal }) => {
         phone,
       })
     );
+    if (userInfo && isSetDefaultAddress) {
+      try {
+        await updateAddress({
+          userId: userInfo._id,
+          firstName: firstName,
+          lastName: lastName,
+          address: address,
+          addressDetails: addressDetails,
+          city: city,
+          state: state,
+          country: country,
+          zipCode: zipCode,
+          phone: phone,
+        });
+        toast.success("Default address updated.");
+      } catch (err) {
+        toast.error(err?.data?.message || err.error);
+      }
+    }
+    refetch();
+    setIsUseDefaultAddress(false);
+    setIsSetDefaultAddress(false);
     closeModal();
   };
 
@@ -66,6 +130,19 @@ const ShippingModal = ({ openModal, closeModal }) => {
         <GrFormClose onClick={closeModal} />
       </div>
       <form className="space-y-4">
+        <div className="flex items-start">
+          <div className="flex items-center h-5">
+            <input
+              checked={isUseDefaultAddress}
+              onClick={useDefaultAddressHandler}
+              type="checkbox"
+              className="w-4 h-4 border border-lightgray rounded focus:ring-2"
+            />
+          </div>
+          <div className="ml-3 text-sm">
+            <label className="text-gray">Use default address</label>
+          </div>
+        </div>
         <div className="flex space-x-3">
           <div>
             <input
@@ -164,14 +241,14 @@ const ShippingModal = ({ openModal, closeModal }) => {
         <div className="flex items-start">
           <div className="flex items-center h-5">
             <input
-              id="remember"
-              aria-describedby="remember"
+              checked={isSetDefaultAddress}
+              onClick={setDefaultAddressHandler}
               type="checkbox"
               className="w-4 h-4 border border-lightgray rounded focus:ring-2"
             />
           </div>
           <div className="ml-3 text-sm">
-            <label className="text-gray">Default Address</label>
+            <label className="text-gray">Set as default address</label>
           </div>
         </div>
         <button

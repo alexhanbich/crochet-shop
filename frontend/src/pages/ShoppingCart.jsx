@@ -130,7 +130,7 @@ const ShoppingCart = () => {
                   </div>
                   {cartItems.map((item) => {
                     return (
-                      <div className="flex justify-between text-sm pt-1">
+                      <div className="flex justify-between text-sm pt-1" key={item._id}>
                         <dt className="text-gray">
                           - {item.name} ({item.cnt})
                         </dt>

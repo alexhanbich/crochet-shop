@@ -34,7 +34,7 @@ const OrderItem = (props) => {
             </div>
           ) : (
             <div className="flex items-center space-x-2">
-              <span className="h-2 w-2 rounded-full bg-gray inline-block"></span>
+              <span className="h-2 w-2 rounded-full bg-lightgray inline-block"></span>
               <div className="text-gray">In Progress</div>
             </div>
           )}
@@ -44,6 +44,7 @@ const OrderItem = (props) => {
           {orderItems.map((item) => {
             return (
               <img
+                key={item.image}
                 src={item.image}
                 alt="image"
                 className="h-32 w-32 rounded object-cover"

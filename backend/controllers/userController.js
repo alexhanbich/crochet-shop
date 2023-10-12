@@ -187,6 +187,42 @@ const updateUserFavorites = asyncHandler(async (req, res) => {
   }
 });
 
+const getDefaultAddress = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+  if (user) {
+    res.json(user.address);
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
+});
+
+const updateDefaultAddress = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+  if (user) {
+    const address = {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      address: req.body.address,
+      addressDetails: req.body.addressDetails,
+      city: req.body.city,
+      state: req.body.state,
+      country: req.body.country,
+      zipCode: req.body.zipCode,
+      phone: req.body.phone,
+    };
+    user.address = address;
+    const updatedUser = await user.save();
+    res.json({
+      _id: updatedUser._id,
+      favorites: updatedUser.favorites,
+    });
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
+});
+
 export {
   registerUser,
   loginUser,
@@ -200,4 +236,6 @@ export {
   removeUserFavorites,
   getUserFavorites,
   updateUserFavorites,
+  getDefaultAddress,
+  updateDefaultAddress,
 };

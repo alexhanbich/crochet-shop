@@ -70,7 +70,7 @@ const Product = ({ product }) => {
               <h5 className="w-3/4 truncate text-gray mt-1">
                 {product.name}
               </h5>
-              <Rating value={product.rating} />
+              <Rating value={product.rating.toFixed(2)} />
             </div>
             <h5 className="text-center font-body2 font-medium mb-2">
               ${product.price.toFixed(2)}

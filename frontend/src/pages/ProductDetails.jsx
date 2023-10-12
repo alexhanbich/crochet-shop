@@ -6,17 +6,22 @@ import { useDispatch, useSelector } from "react-redux";
 import Rating from "../components/Rating";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { date } from "../utils/utils";
+import RatingExtended from "../components/RatingExtended";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const [cnt, setCnt] = useState(1);
-  const { data: product, isLoading, error } = useGetProductDetailsQuery(id);
-
+  const {
+    data: product,
+    isLoading,
+    error,
+    refetch,
+  } = useGetProductDetailsQuery(id);
   const { userInfo } = useSelector((state) => state.auth);
 
   const { favoriteItems } = useSelector((state) => state.cart);
-
   const [updateFavorites, { isLoading: loadingUpdateFavorites }] =
     useUpdateFavoritesMutation();
 
@@ -25,7 +30,7 @@ const ProductDetails = () => {
   };
 
   const addToFavoritesHandler = async () => {
-    dispatch(addToFavorites({ ...product }))
+    dispatch(addToFavorites({ ...product }));
     if (userInfo) {
       try {
         let newFavoriteItems = [...favoriteItems];
@@ -51,8 +56,8 @@ const ProductDetails = () => {
       ) : (
         <>
           <div className="flex bg-white p-4 pt-16">
-            <img className="w-1/2 p-8" src={product.image} />
-            <div className="w-1/2 p-8 pl-0">
+            <img className="w-1/2 h-1/2" src={product.image} />
+            <div className="w-1/2 pt-8">
               <h1 className="text-2xl pb-4">{product.name}</h1>
               {product.numStock > 0 ? (
                 <p className="pb-4 text-gray">In Stock</p>
@@ -63,7 +68,7 @@ const ProductDetails = () => {
                 <h5 className="font-body2 font-medium mr-4">
                   ${product.price.toFixed(2)}
                 </h5>
-                <Rating value={product.rating} />
+                <Rating value={product.rating.toFixed(2)} />
               </div>
               <p className="pb-8">{product.description}</p>
               {product.numStock > 0 && (
@@ -93,6 +98,35 @@ const ProductDetails = () => {
                   Favorite
                 </button>
               </div>
+              <div className="flex pt-8 pb-4 items-center space-x-6">
+                <h1 className="text-2xl ">Reviews</h1>
+                {product.reviews.length > 0 && (
+                  <div className="text-sm hover:cursor-pointer hover:underline">
+                    View All{"->"}
+                  </div>
+                )}
+              </div>
+
+              <hr className="text-lightgray px-2" />
+              {product.reviews.length > 0 ? (
+                product.reviews.slice(0,2).map((review) => {
+                  return (
+                    <div className="w-full">
+                      <div>{review.name}</div>
+                      <div className="flex space-x-6">
+                        <RatingExtended value={review.rating} />
+                        <div>{date(review.updatedAt)}</div>
+                      </div>
+                      <div className="py-2">{review.comment}</div>
+                      <div className="py-1"></div>
+                      <hr className="text-lightgray px-2" />
+                      <div className="py-1"></div>
+                    </div>
+                  );
+                })
+              ) : (
+                <div className="text-lg py-2">No Reviews.</div>
+              )}
             </div>
           </div>
         </>

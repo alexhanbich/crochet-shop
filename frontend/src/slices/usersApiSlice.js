@@ -81,6 +81,21 @@ export const usersApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["User"],
     }),
+    getAddress: builder.query({
+      query: (userId) => ({
+        url: `${USERS_URL}/address/${userId}`,
+        method: "GET",
+      }),
+      invalidatesTags: ["User"],
+    }),
+    updateAddress: builder.mutation({
+      query: (data) => ({
+        url: `${USERS_URL}/address/${data.userId}`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["User"],
+    }),
   }),
 });
 
@@ -96,4 +111,6 @@ export const {
   useUpdateFavoritesMutation,
   useGetFavoritesQuery,
   useRemoveFavoritesMutation,
+  useGetAddressQuery,
+  useUpdateAddressMutation,
 } = usersApiSlice;

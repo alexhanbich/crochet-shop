@@ -13,6 +13,8 @@ import {
   updateUserFavorites,
   removeUserFavorites,
   getUserFavorites,
+  updateDefaultAddress,
+  getDefaultAddress,
 } from "../controllers/userController.js";
 import { protect, admin } from "../middleware/authMiddleware.js";
 
@@ -29,5 +31,6 @@ router
   .get(protect, admin, getUserById)
   .put(protect, admin, updateUser);
 router.route("/favorites/:id").put(updateUserFavorites).delete(removeUserFavorites).get(getUserFavorites);
+router.route("/address/:id").put(updateDefaultAddress).get(getDefaultAddress);
 
 export default router;

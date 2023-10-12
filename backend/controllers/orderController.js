@@ -52,7 +52,9 @@ const createOrder = asyncHandler(async (req, res) => {
 });
 
 const getOrders = asyncHandler(async (req, res) => {
-  const orders = await Order.find({ user: req.user._id }).sort({ createdAt: 'desc' });
+  const orders = await Order.find({ user: req.user._id }).sort({
+    createdAt: "desc",
+  });
   res.json(orders);
 });
 
@@ -82,13 +84,58 @@ const updateOrderToDelivered = asyncHandler(async (req, res) => {
     res.json(updatedOrder);
   } else {
     res.status(404);
-    throw new Error('Order not found');
+    throw new Error("Order not found");
   }
 });
 
 const getAllUserOrders = asyncHandler(async (req, res) => {
-  const orders = await Order.find({}).populate('user', 'id name').sort({ isDelivered: 'asc' }).sort({ createdAt: 'desc' });
+  const orders = await Order.find({})
+    .populate("user", "id name")
+    .sort({ isDelivered: "asc" })
+    .sort({ createdAt: "desc" });
   res.json(orders);
+});
+
+const createProductReview = asyncHandler(async (req, res) => {
+  const { productId, rating, comment } = req.body;
+  const product = await Product.findById(productId);
+  console.log(productId, rating, comment);
+  if (product) {
+    const review = {
+      name: req.user.name,
+      rating: Number(rating),
+      comment,
+      user: req.user._id,
+    };
+    const index = product.reviews.findIndex(
+      (review) => review.user.toString() === req.user._id.toString()
+    );
+    console.log(index)
+    if (index !== -1) {
+      console.log("huh??")
+      product.reviews[index] = review;
+      product.rating =
+        product.reviews.reduce((acc, item) => item.rating + acc, 0) /
+        product.reviews.length;
+      await product.save();
+      res.status(201).json({ message: "Review updated." });
+    } else {
+      console.log("hit-2")
+      product.reviews.push(review);
+      console.log("hit0")
+      product.numReviews = product.reviews.length;
+      console.log("hit")
+      product.rating =
+        product.reviews.reduce((acc, item) => item.rating + acc, 0) /
+        product.reviews.length;
+      console.log("hit2")
+      await product.save();
+      res.status(201).json({ message: "Review added." });
+    }
+  } else {
+    res.status(404);
+    throw new Error("Product not found.");
+  }
 });
 
 export {
@@ -98,4 +145,5 @@ export {
   updateOrderToPaid,
   updateOrderToDelivered,
   getAllUserOrders,
+  createProductReview,
 };

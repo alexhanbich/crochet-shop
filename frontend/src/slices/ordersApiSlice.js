@@ -47,6 +47,13 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
         method: 'PUT',
       }),
     }),
+    createReview: builder.mutation({
+      query: (data) => ({
+        url: `${ORDERS_URL}/reviews`,
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -58,4 +65,5 @@ export const {
   useGetOrdersQuery,
   useGetAllUserOrdersQuery,
   useDeliverOrderMutation,
+  useCreateReviewMutation,
 } = ordersApiSlice;
