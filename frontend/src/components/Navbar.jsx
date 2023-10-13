@@ -52,14 +52,14 @@ const Navbar = () => {
         <div className="group relative">
           <Link to="/cart">
             <LiaShoppingBagSolid className="mr-4" />
-          {cartItems.length > 0 && (
-            <div className="absolute -mt-6 ml-3 w-3 h-3 rounded-full bg-red flex justify-center items-center">
-              <p className="text-xxs text-white">
-                {cartItems.reduce((i, acc) => i + acc.cnt, 0)}
-              </p>
-            </div>
-          )}
-          <hr className="border-transparent mt-1 mr-4 w-5 group-hover:border-black" />
+            {cartItems.length > 0 && (
+              <div className="absolute -mt-6 ml-3 w-3 h-3 rounded-full bg-red flex justify-center items-center">
+                <p className="text-xxs text-white">
+                  {cartItems.reduce((i, acc) => i + acc.cnt, 0)}
+                </p>
+              </div>
+            )}
+            <hr className="border-transparent mt-1 mr-4 w-5 group-hover:border-black" />
           </Link>
         </div>
         {userInfo ? (

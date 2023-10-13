@@ -6,8 +6,7 @@ const getProducts = asyncHandler(async (req, res) => {
   if (Number(req.query.pageNumber) == -1) {
     const products = await Product.find({});
     res.json({ products });
-  }
-  else {
+  } else {
     const NUM_ITEMS = 8;
     const page = Number(req.query.pageNumber) || 1;
     const count = await Product.countDocuments({});

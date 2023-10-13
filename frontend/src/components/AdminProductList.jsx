@@ -7,8 +7,10 @@ import { LiaPlusCircleSolid } from "react-icons/lia";
 import ProductModal from "./ProductModal";
 
 const AdminProductList = () => {
-  const pageNumber = -1
-  const { data, isLoading, error, refetch } = useGetProductsQuery({ pageNumber });
+  const pageNumber = -1;
+  const { data, isLoading, error, refetch } = useGetProductsQuery({
+    pageNumber,
+  });
 
   const [openModal, setOpenModal] = useState(false);
 

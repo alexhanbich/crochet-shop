@@ -110,9 +110,9 @@ const createProductReview = asyncHandler(async (req, res) => {
     const index = product.reviews.findIndex(
       (review) => review.user.toString() === req.user._id.toString()
     );
-    console.log(index)
+    console.log(index);
     if (index !== -1) {
-      console.log("huh??")
+      console.log("huh??");
       product.reviews[index] = review;
       product.rating =
         product.reviews.reduce((acc, item) => item.rating + acc, 0) /
@@ -120,15 +120,15 @@ const createProductReview = asyncHandler(async (req, res) => {
       await product.save();
       res.status(201).json({ message: "Review updated." });
     } else {
-      console.log("hit-2")
+      console.log("hit-2");
       product.reviews.push(review);
-      console.log("hit0")
+      console.log("hit0");
       product.numReviews = product.reviews.length;
-      console.log("hit")
+      console.log("hit");
       product.rating =
         product.reviews.reduce((acc, item) => item.rating + acc, 0) /
         product.reviews.length;
-      console.log("hit2")
+      console.log("hit2");
       await product.save();
       res.status(201).json({ message: "Review added." });
     }

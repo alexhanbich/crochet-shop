@@ -8,9 +8,7 @@ const AdminOrderList = () => {
     <p>loading</p>
   ) : (
     <div className="space-y-4 w-full pt-12 pl-16">
-      <h1 className="text-xl font-bold">
-        All Orders
-      </h1>
+      <h1 className="text-xl font-bold">All Orders</h1>
       <table className="table-auto w-full text-left border">
         <thead className="border">
           <tr>

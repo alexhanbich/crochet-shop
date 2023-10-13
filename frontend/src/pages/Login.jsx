@@ -35,7 +35,7 @@ const Login = () => {
 
       navigate(redirect);
     } catch (err) {
-        console.log(err)
+      console.log(err);
       toast.error(err?.data?.message || err.error);
     }
   };
@@ -43,9 +43,7 @@ const Login = () => {
     <div className="flex flex-col items-center px-6 py-8 mx-auto mt-24 text-black">
       <div className="w-[480px] bg-secondary rounded-lg shadow">
         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-          <h1 className="text-xl font-bold">
-            Sign In
-          </h1>
+          <h1 className="text-xl font-bold">Sign In</h1>
           <form className="space-y-4" noValidate onSubmit={submitHandler}>
             <div>
               <label className="block mb-2 text-sm">Email</label>
@@ -91,7 +89,10 @@ const Login = () => {
               Sign in
             </button>
             <div className="my-1"></div>
-            <Link to={redirect ? `/register?redirect=${redirect}` : '/register'} className="text-sm text-primary-600 hover:underline">
+            <Link
+              to={redirect ? `/register?redirect=${redirect}` : "/register"}
+              className="text-sm text-primary-600 hover:underline"
+            >
               Don’t have an account yet? Sign up
             </Link>
           </form>

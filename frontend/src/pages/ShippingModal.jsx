@@ -16,7 +16,12 @@ const ShippingModal = ({ openModal, closeModal }) => {
 
   const { userInfo } = useSelector((state) => state.auth);
   const userId = userInfo?._id;
-  const { data: userAddress, isLoading, error, refetch } = useGetAddressQuery(userId);
+  const {
+    data: userAddress,
+    isLoading,
+    error,
+    refetch,
+  } = useGetAddressQuery(userId);
   const [updateAddress, { isLoading: loadingUpdateAddress }] =
     useUpdateAddressMutation();
 
@@ -34,7 +39,7 @@ const ShippingModal = ({ openModal, closeModal }) => {
 
   const [isUseDefaultAddress, setIsUseDefaultAddress] = useState(false);
   const [isSetDefaultAddress, setIsSetDefaultAddress] = useState(false);
-  
+
   const dispatch = useDispatch();
   const ref = useRef();
   useEffect(() => {
@@ -124,9 +129,9 @@ const ShippingModal = ({ openModal, closeModal }) => {
   };
 
   return (
-    <dialog ref={ref} onCancel={closeModal} className=" rounded rounded-lg p-4">
+    <dialog ref={ref} onCancel={closeModal} className="rounded rounded-lg p-4">
       <div className="flex justify-between">
-        <h1 className="pb-4">Shipping Address</h1>
+        <div className="text-2xl pb-4">Shipping Address</div>
         <GrFormClose onClick={closeModal} />
       </div>
       <form className="space-y-4">
@@ -134,7 +139,7 @@ const ShippingModal = ({ openModal, closeModal }) => {
           <div className="flex items-center h-5">
             <input
               checked={isUseDefaultAddress}
-              onClick={useDefaultAddressHandler}
+              onChange={useDefaultAddressHandler}
               type="checkbox"
               className="w-4 h-4 border border-lightgray rounded focus:ring-2"
             />
@@ -242,7 +247,7 @@ const ShippingModal = ({ openModal, closeModal }) => {
           <div className="flex items-center h-5">
             <input
               checked={isSetDefaultAddress}
-              onClick={setDefaultAddressHandler}
+              onChange={setDefaultAddressHandler}
               type="checkbox"
               className="w-4 h-4 border border-lightgray rounded focus:ring-2"
             />

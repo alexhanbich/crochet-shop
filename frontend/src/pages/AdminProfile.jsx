@@ -28,8 +28,9 @@ const AdminProfile = () => {
   let [currentString, setCurrentString] = useState("orders");
   let bgOrdersAccent =
     currentString === "orders" ? "bg-primary" : "bg-secondary";
-    let bgProductAccent = currentString === "products" ? "bg-primary" : "bg-secondary";
-    let bgUserAccent = currentString === "users" ? "bg-primary" : "bg-secondary";
+  let bgProductAccent =
+    currentString === "products" ? "bg-primary" : "bg-secondary";
+  let bgUserAccent = currentString === "users" ? "bg-primary" : "bg-secondary";
 
   return (
     <div className="flex">

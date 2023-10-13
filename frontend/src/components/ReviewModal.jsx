@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import SelectRating from "../components/SelectRating";
 import { toast } from "react-toastify";
 import { useCreateReviewMutation } from "../slices/ordersApiSlice";
+import { GrFormClose } from "react-icons/gr";
 
 const ReviewModal = ({ productId, openModal, closeModal }) => {
   const [comment, setComment] = useState("");
@@ -24,8 +25,7 @@ const ReviewModal = ({ productId, openModal, closeModal }) => {
       }).unwrap();
       if (res.message === "Review updated.") {
         toast.success("Review updated.");
-      }
-      else {
+      } else {
         toast.success("Review added.");
       }
     } catch (err) {
@@ -49,8 +49,16 @@ const ReviewModal = ({ productId, openModal, closeModal }) => {
   };
 
   return (
-    <dialog ref={ref} onCancel={closeModal} className="p-4 rounded rounded-lg w-[480px]">
-      <div className="text-2xl pt-4">Write a review</div>
+    <dialog
+      ref={ref}
+      onCancel={closeModal}
+      className="p-4 rounded rounded-lg w-[480px]"
+    >
+      <div className="flex justify-between">
+        <div className="text-2xl pt-4">Write a review</div>
+        <GrFormClose onClick={closeModal} />
+      </div>
+
       <hr className="text-lightgray" />
       <form className="space-y-4">
         <div>

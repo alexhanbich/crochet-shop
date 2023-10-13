@@ -48,9 +48,7 @@ const Register = () => {
     <div className="flex flex-col items-center px-6 py-8 mx-auto mt-6 text-black">
       <div className="w-[480px] bg-secondary rounded-lg shadow">
         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-          <h1 className="text-xl font-bold">
-            Create your account
-          </h1>
+          <h1 className="text-xl font-bold">Create your account</h1>
           <form className="space-y-4" noValidate onSubmit={submitHandler}>
             <div>
               <label className="block mb-2 text-sm">Name</label>
@@ -102,7 +100,7 @@ const Register = () => {
             </button>
             <div className="my-1">{isLoading && <p>loading</p>}</div>
             <Link
-              to='/login'
+              to="/login"
               className="text-sm text-primary-600 hover:underline"
             >
               Already have an account? Log in

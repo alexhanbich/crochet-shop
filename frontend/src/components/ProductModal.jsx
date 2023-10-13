@@ -44,7 +44,7 @@ const ProductModal = ({
     }
   };
 
-  const updateHandler = async(e) => {
+  const updateHandler = async (e) => {
     e.preventDefault();
     try {
       await updateProduct({
@@ -59,7 +59,7 @@ const ProductModal = ({
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }
-  }
+  };
 
   const resetStates = () => {
     setName("");
@@ -67,9 +67,9 @@ const ProductModal = ({
     setDescription("");
     setPrice("");
     setNumStock("");
-  }
+  };
 
-  const createHandler = async(e) => {
+  const createHandler = async (e) => {
     e.preventDefault();
     try {
       await createProduct({
@@ -83,13 +83,12 @@ const ProductModal = ({
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }
-  }
+  };
 
-  const submitHandler = async(e) => {
+  const submitHandler = async (e) => {
     if (isCreate) {
       createHandler(e);
-    }
-    else {
+    } else {
       updateHandler(e);
     }
     refetch();
@@ -111,7 +110,11 @@ const ProductModal = ({
   };
 
   return (
-    <dialog ref={ref} onCancel={closeModal} className="rounded rounded-lg p-4 w-[480px]">
+    <dialog
+      ref={ref}
+      onCancel={closeModal}
+      className="rounded rounded-lg p-4 w-[480px]"
+    >
       <div className="flex justify-between">
         {isCreate ? (
           <h1 className="pb-4">Create Product</h1>
@@ -140,7 +143,12 @@ const ProductModal = ({
             onChange={(e) => setImage(e.target.value)}
             readOnly
           />
-          <input type="file" key={Date.now()} onChange={uploadHandler} required />
+          <input
+            type="file"
+            key={Date.now()}
+            onChange={uploadHandler}
+            required
+          />
         </div>
         <div>
           <label>Product Description:</label>

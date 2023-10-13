@@ -25,7 +25,8 @@ const Profile = () => {
   };
   let [currentComponent, setCurrentComponent] = useState(<OrderList />);
   let [currentString, setCurrentString] = useState("orders");
-  let bgProfileAccent = currentString === "edit" ? "bg-primary" : "bg-secondary";
+  let bgProfileAccent =
+    currentString === "edit" ? "bg-primary" : "bg-secondary";
   let bgOrdersAccent =
     currentString === "orders" ? "bg-primary" : "bg-secondary";
 

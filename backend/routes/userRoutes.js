@@ -30,7 +30,11 @@ router
   .delete(protect, admin, deleteUser)
   .get(protect, admin, getUserById)
   .put(protect, admin, updateUser);
-router.route("/favorites/:id").put(updateUserFavorites).delete(removeUserFavorites).get(getUserFavorites);
+router
+  .route("/favorites/:id")
+  .put(updateUserFavorites)
+  .delete(removeUserFavorites)
+  .get(getUserFavorites);
 router.route("/address/:id").put(updateDefaultAddress).get(getDefaultAddress);
 
 export default router;

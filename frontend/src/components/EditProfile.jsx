@@ -17,15 +17,15 @@ const EditProfile = () => {
     setName(userInfo.name);
     setEmail(userInfo.email);
   }, [userInfo.email, userInfo.name]);
-  
+
   const [updateProfile, { isLoading: loadingUpdateProfile }] =
     useProfileMutation();
-  
+
   const dispatch = useDispatch();
   const submitHandler = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      toast.error('Passwords do not match');
+      toast.error("Passwords do not match");
     } else {
       try {
         const res = await updateProfile({
@@ -35,17 +35,15 @@ const EditProfile = () => {
           password,
         }).unwrap();
         dispatch(setCredentials({ ...res }));
-        toast.success('Profile updated successfully');
+        toast.success("Profile updated successfully");
       } catch (err) {
         toast.error(err?.data?.message || err.error);
       }
     }
-  }
+  };
   return (
     <div className="space-y-4 w-[480px] mt-12 ml-16">
-      <h1 className="text-xl font-bold">
-        Edit Profile
-      </h1>
+      <h1 className="text-xl font-bold">Edit Profile</h1>
       <form className="space-y-4" noValidate onSubmit="">
         <div>
           <label className="block mb-2 text-sm">Name</label>

@@ -23,7 +23,7 @@ const AdminOrderItem = (props) => {
       <td>
         <LiaEdit
           className="mx-2 text-black text-xl hover:text-gray hover:cursor-pointer"
-          onClick={ viewOrderHandler }
+          onClick={viewOrderHandler}
         />
       </td>
     </tr>

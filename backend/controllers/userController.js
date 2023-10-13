@@ -143,9 +143,9 @@ const removeUserFavorites = asyncHandler(async (req, res) => {
     let product = user.favorites.find((i) => i._id === req.body.favoriteId);
     if (product) {
       var index = user.favorites.indexOf(product);
-        if (index !== -1) {
-          user.favorites.splice(index, 1);
-        }
+      if (index !== -1) {
+        user.favorites.splice(index, 1);
+      }
       user.favorites.splice(index, 1);
       const updatedUser = await user.save();
       res.json({
@@ -161,11 +161,13 @@ const removeUserFavorites = asyncHandler(async (req, res) => {
 });
 
 const getUserFavorites = asyncHandler(async (req, res) => {
-  if (req.params.id === 'loading') {
+  if (req.params.id === "loading") {
     return res.json("");
   }
   const user = await User.findById(req.params.id);
-  const products = await Product.find({ _id: { $in: user.favorites.map((i)=> i._id) } });
+  const products = await Product.find({
+    _id: { $in: user.favorites.map((i) => i._id) },
+  });
   if (!products) {
     return res.status(404).json({ message: "Products not found." });
   }

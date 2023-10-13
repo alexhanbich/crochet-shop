@@ -8,11 +8,13 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { date } from "../utils/utils";
 import RatingExtended from "../components/RatingExtended";
+import ViewReviewsModal from "../components/ViewReviewsModal";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const [cnt, setCnt] = useState(1);
+  const [openModal, setOpenModal] = useState(false);
   const {
     data: product,
     isLoading,
@@ -101,17 +103,27 @@ const ProductDetails = () => {
               <div className="flex pt-8 pb-4 items-center space-x-6">
                 <h1 className="text-2xl ">Reviews</h1>
                 {product.reviews.length > 0 && (
-                  <div className="text-sm hover:cursor-pointer hover:underline">
+                  <div
+                    className="text-sm hover:cursor-pointer hover:underline"
+                    onClick={() => setOpenModal(true)}
+                  >
                     View All{"->"}
                   </div>
                 )}
+                <div className="flex items-center justify-center">
+                  <ViewReviewsModal
+                    product={product}
+                    openModal={openModal}
+                    closeModal={() => setOpenModal(false)}
+                  />
+                </div>
               </div>
 
               <hr className="text-lightgray px-2" />
               {product.reviews.length > 0 ? (
-                product.reviews.slice(0,2).map((review) => {
+                product.reviews.slice(0, 2).map((review, idx) => {
                   return (
-                    <div className="w-full">
+                    <div className="w-full" key={idx}>
                       <div>{review.name}</div>
                       <div className="flex space-x-6">
                         <RatingExtended value={review.rating} />

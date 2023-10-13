@@ -21,7 +21,7 @@ const Product = ({ product }) => {
   };
 
   const addToFavoritesHandler = async () => {
-    dispatch(addToFavorites({ ...product }))
+    dispatch(addToFavorites({ ...product }));
     if (userInfo) {
       try {
         let newFavoriteItems = [...favoriteItems];
@@ -67,9 +67,7 @@ const Product = ({ product }) => {
         <div className="mx-5">
           <Link to={`/product/${product._id}`}>
             <div className="flex justify-between space-y-1">
-              <h5 className="w-3/4 truncate text-gray mt-1">
-                {product.name}
-              </h5>
+              <h5 className="w-3/4 truncate text-gray mt-1">{product.name}</h5>
               <Rating value={product.rating.toFixed(2)} />
             </div>
             <h5 className="text-center font-body2 font-medium mb-2">

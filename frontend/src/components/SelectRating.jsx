@@ -1,7 +1,7 @@
 import { FaStar, FaRegStar } from "react-icons/fa";
 import { useState } from "react";
 
-const SelectRating = ({value, setValue}) => {
+const SelectRating = ({ value, setValue }) => {
   return (
     <div className="flex text-xl items-center">
       {value > 0 ? (

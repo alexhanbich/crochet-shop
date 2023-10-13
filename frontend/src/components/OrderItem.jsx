@@ -19,7 +19,7 @@ const OrderItem = (props) => {
         <div className="flex space-x-8">
           <div className="flex flex-col space-y-1">
             <h1>Order #{order._id}</h1>
-            <div className="text-gray">{ date(order.createdAt) }</div>
+            <div className="text-gray">{date(order.createdAt)}</div>
             <a
               className="text-green hover:cursor-pointer"
               onClick={viewOrderHandler}
@@ -38,7 +38,6 @@ const OrderItem = (props) => {
               <div className="text-gray">In Progress</div>
             </div>
           )}
-          
         </div>
         <div className="flex">
           {orderItems.map((item) => {
