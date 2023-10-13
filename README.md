@@ -20,6 +20,7 @@ On [https://hangy-shop.onrender.com/login](https://hangy-shop.onrender.com/login
 - user authentication using JWT
 - can save favorites to user account
 - save shipping address to user account
+- shoppingcart information preserved after login
 - can write, update rating & reviews
 - immediate updates (using redux store) to navbar & orderdetails when cart is updated
 - view past orders
