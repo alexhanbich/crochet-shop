@@ -6,6 +6,10 @@ Ecommerce Shop using React, Express, MongoDB & Redux Toolkit
 ## Demo
 Link:[https://hangy-shop.onrender.com/](https://hangy-shop.onrender.com/)
 
+On [https://hangy-shop.onrender.com/login](https://hangy-shop.onrender.com/login):
+- click on Demo as Admin to login as an example Admin
+- click on Demo as User to login as an example User
+
 ## TODO
 - Payment integration
 - Responsive design
