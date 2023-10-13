@@ -29,4 +29,4 @@ On [https://hangy-shop.onrender.com/login](https://hangy-shop.onrender.com/login
 ### Admin
 - can see and edit (mark delivered) for all orders, ordered by isDelievered then by date
 - can see and edit all users
-- can see and edit all products
+- can see and edit all products, including images
