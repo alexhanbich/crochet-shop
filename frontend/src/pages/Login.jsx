@@ -39,12 +39,24 @@ const Login = () => {
       toast.error(err?.data?.message || err.error);
     }
   };
+
+  const demoHandler = async (email, password) => {
+    try {
+      const res = await login({ email, password }).unwrap();
+      dispatch(setCredentials({ ...res }));
+
+      navigate(redirect);
+    } catch (err) {
+      console.log(err);
+      toast.error(err?.data?.message || err.error);
+    }
+  };
   return (
     <div className="flex flex-col items-center px-6 py-8 mx-auto mt-24 text-black">
       <div className="w-[480px] bg-secondary rounded-lg shadow">
         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
           <h1 className="text-xl font-bold">Sign In</h1>
-          <form className="space-y-4" noValidate onSubmit={submitHandler}>
+          <form className="space-y-4" noValidate>
             <div>
               <label className="block mb-2 text-sm">Email</label>
               <input
@@ -83,12 +95,30 @@ const Login = () => {
             </div> */}
             <button
               type="submit"
+              onClick={submitHandler}
               disabled={isLoading}
               className="w-full bg-primary hover:bg-accent rounded-lg text-sm px-5 py-2.5 text-center"
             >
               Sign in
             </button>
-            <div className="my-1"></div>
+            <div className="flex space-x-6 my-3">
+              <button
+                type="submit"
+                disabled={isLoading}
+                onClick={() => demoHandler("admin@email.com", "123456")}
+                className="w-full bg-black text-white hover:bg-gray rounded-lg text-sm px-5 py-2.5 text-center"
+              >
+                Demo as Admin
+              </button>
+              <button
+                type="submit"
+                disabled={isLoading}
+                onClick={() => demoHandler("john@email.com", "123456")}
+                className="w-full bg-black text-white hover:bg-gray rounded-lg text-sm px-5 py-2.5 text-center"
+              >
+                Demo as User
+              </button>
+            </div>
             <Link
               to={redirect ? `/register?redirect=${redirect}` : "/register"}
               className="text-sm text-primary-600 hover:underline"
